@@ -17,14 +17,17 @@ import java.util.List;
 
 @Component
 public class LianjiaSpider implements PageProcessor {
+    public final Pipeline lianjiaPipeline;
     @Autowired
-    private Pipeline lianjiaPipeline;
+    public LianjiaSpider(Pipeline lianjiaPipeline) {
+        this.lianjiaPipeline = lianjiaPipeline;
+    }
     //正则匹配某个房子的链接   https://gz.lianjia.com/ershoufang/108400227459.html
     private static final String urlDetail = "https://gz\\.lianjia\\.com/ershoufang/\\d+\\.html";
-    //正则匹配首页链接   https://gz.lianjia.com/ershoufang/tianhe
-    private static final String urlBase = "https://gz\\.lianjia\\.com/ershoufang(/[a-z]+)?$";
+    //正则匹配首页链接   https://gz.lianjia.com/ershoufang/tianhe/
+    private static final String urlBase = "https://gz\\.lianjia\\.com/ershoufang(/[a-z]+)?/$";
     //正则匹配翻页链接   https://gz.lianjia.com/ershoufang/tianhe/pg2
-    private  static final String urlIndex = "https://gz\\.lianjia\\.com/ershoufang(/[a-z]+)?/pg\\d+";
+    private  static final String urlIndex = "https://gz\\.lianjia\\.com/ershoufang(/[a-z]+)?/pg\\d+/";
 
     private Site site = Site.me().setUserAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5").setRetryTimes(3).setSleepTime(100).setTimeOut(10000);
     private static Logger logger = LoggerFactory.getLogger(LianjiaSpider.class);
@@ -33,13 +36,13 @@ public class LianjiaSpider implements PageProcessor {
         if (page.getUrl().regex(urlBase).match()) {
             List<String> pgList = new ArrayList<>();
             for (int i = 2; i < 101; i++) {
-                pgList.add(page.getUrl().toString() + "/pg" + i);
+                pgList.add(page.getUrl().toString() + "pg" + i + "/");
             }
             page.addTargetRequests(pgList);
         }
 
         if (page.getUrl().regex(urlIndex).match()) {
-            logger.info("爬取列表页");
+            logger.debug("爬取列表页");
             //logger.info(page.getHtml().toString());
             //xpath得到列表页上所有房子的链接,加入到后续爬取队列
             page.addTargetRequests(page.getHtml().xpath("//div[@class=title]/a/@href").all());
@@ -47,7 +50,7 @@ public class LianjiaSpider implements PageProcessor {
 
         //如果当前爬取的为某个房子页面
         if (page.getUrl().regex(urlDetail).match()) {
-            logger.info("爬取详情页");
+            logger.debug("爬取详情页");
             Html pageHtml = page.getHtml();
             House house = new House();
             house.setCode(page.getUrl().toString().replaceAll("\\D",""));
@@ -72,10 +75,5 @@ public class LianjiaSpider implements PageProcessor {
     @Override
     public Site getSite() {
         return site;
-    }
-
-    public void crawl() {
-        //Spider.create(new LianjiaSpider()).addUrl("https://gz.lianjia.com/ershoufang/108400246730.html").addPipeline(lianjiaPipeline).thread(5).run();
-        Spider.create(new LianjiaSpider()).addUrl("https://gz.lianjia.com/ershoufang/tianhe").addPipeline(lianjiaPipeline).thread(5).run();
     }
 }
