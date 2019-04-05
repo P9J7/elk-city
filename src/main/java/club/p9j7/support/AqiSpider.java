@@ -14,11 +14,11 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import javax.script.Invocable;
 import javax.script.ScriptException;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class AqiSpider implements PageProcessor {
     public final Pipeline aqiPipeline;
-
     private final Invocable invocable;
     private Site site = Site.me().setUserAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5").setRetryTimes(3).setSleepTime(100).setTimeOut(10000);
     private static Logger logger = LoggerFactory.getLogger(AqiSpider.class);
@@ -32,6 +32,8 @@ public class AqiSpider implements PageProcessor {
     @Override
     public void process(Page page) {
         logger.debug("page:" + page.getHtml().toString());
+        Map map = page.getRequest().getExtras();
+        String city = (String) map.get("city");
         String response = null;
         try {
             response = (String) invocable.invokeFunction("decodeData", page.getHtml().xpath("//body/text()").toString());
@@ -42,6 +44,9 @@ public class AqiSpider implements PageProcessor {
         String data = response.substring(response.indexOf("["), response.indexOf("]") + 1);
         logger.debug("aqiList:" + data);
         List<Aqi> aqiList = JSONObject.parseArray(data, Aqi.class);
+        for (Aqi aqi: aqiList) {
+            aqi.setCity(city);
+        }
         page.putField("aqiList", aqiList);
     }
 

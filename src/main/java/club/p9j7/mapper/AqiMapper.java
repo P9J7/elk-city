@@ -11,9 +11,9 @@ import java.util.List;
 public interface AqiMapper {
     @Insert({
             "<script>",
-            "insert into aqi(aqi, quality, pm2_5, pm10, so2, co, no2, o3, timePoint) values ",
+            "insert into aqi(aqi, city, quality, pm2_5, pm10, so2, co, no2, o3, timePoint) values ",
             "<foreach collection='list' item='item' index='index' separator=','>",
-            "(#{item.aqi}, #{item.quality},#{item.pm2_5}, #{item.pm10}, #{item.so2}, #{item.co}, #{item.no2}, #{item.o3}, #{item.timePoint})",
+            "(#{item.aqi}, #{item.city}, #{item.quality},#{item.pm2_5}, #{item.pm10}, #{item.so2}, #{item.co}, #{item.no2}, #{item.o3}, #{item.timePoint})",
             "</foreach>",
             "</script>"
     })

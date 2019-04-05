@@ -9,12 +9,14 @@ public class Aqi {
     private Integer pm2_5;
     private Integer pm10;
     private Integer so2;
+    //todo co该为doublt????
     private Integer co;
     private Integer no2;
     private Integer o3;
     private LocalDate timePoint;
+    private String city;
 
-    public Aqi(Integer id, Integer aqi, Quality quality, Integer pm2_5, Integer pm10, Integer so2, Integer co, Integer no2, Integer o3, LocalDate timePoint) {
+    public Aqi(Integer id, Integer aqi, Quality quality, Integer pm2_5, Integer pm10, Integer so2, Integer co, Integer no2, Integer o3, LocalDate timePoint, String city) {
         this.id = id;
         this.aqi = aqi;
         this.quality = quality;
@@ -25,6 +27,15 @@ public class Aqi {
         this.no2 = no2;
         this.o3 = o3;
         this.timePoint = timePoint;
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public LocalDate getTimePoint() {
@@ -124,6 +135,7 @@ public class Aqi {
                 ", no2=" + no2 +
                 ", o3=" + o3 +
                 ", timePoint=" + timePoint +
+                ", city='" + city + '\'' +
                 '}';
     }
 }

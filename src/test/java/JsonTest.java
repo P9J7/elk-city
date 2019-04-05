@@ -4,6 +4,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -19,5 +23,28 @@ public class JsonTest {
     public void testPattern() {
         String string = "fasdf[sdfasdfasdf][dsaf]";
         System.out.println(string.substring(string.indexOf("["), string.indexOf("]")+1));
+
+    }
+
+    @Test
+    public void testCityName(){
+        String url = "https://sh.lianjia.com/ershoufang/107101033946.html";
+        System.out.println(url.substring(url.indexOf("/") + 2, url.indexOf(".")));
+    }
+
+    @Test
+    public void testMonth() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
+        String nowDate=format.format(new Date());
+        Date minDate = format.parse("201301");
+        Date maxDate = format.parse(nowDate);
+        Calendar dd = Calendar.getInstance();
+        dd.setTime(minDate);
+        while (dd.getTime().before(maxDate)) {
+            String str = format.format(dd.getTime());
+            System.out.println(str);
+            dd.add(Calendar.MONTH, 1);
+        }
+        System.out.println(nowDate);
     }
 }
