@@ -23,17 +23,17 @@ public class LianjiaSpider implements PageProcessor {
         this.lianjiaPipeline = lianjiaPipeline;
     }
     //正则匹配某个房子的链接   https://gz.lianjia.com/ershoufang/108400227459.html
-    private static final String urlDetail = "https://(gz|bj|sh|sz)\\.lianjia\\.com/ershoufang/\\d+\\.html";
+    private static final String urlDetail = "https://(gz|bj|sh|sz).lianjia.com/ershoufang/\\d+\\.html";
     //成交房子
-    private static final String urlDealDetail = "https://(gz|bj|sh|sz)\\.lianjia\\.com/chengjiao/\\d+\\.html";
+    private static final String urlDealDetail = "https://(gz|bj|sh|sz).lianjia.com/chengjiao/\\d+\\.html";
     //正则匹配首页链接   https://gz.lianjia.com/ershoufang/tianhe/
-    private static final String urlBase = "https://(gz|bj|sh|sz)\\.lianjia\\.com/ershoufang(/[a-z]+)?/$";
+    private static final String urlBase = "https://(gz|bj|sh|sz).lianjia.com/ershoufang(/[a-z]+)?/$";
     //成交首页
-    private static final String urlDealBase = "https://(gz|bj|sh|sz)\\.lianjia\\.com/chengjiao(/[a-z]+)?/$";
+    private static final String urlDealBase = "https://(gz|bj|sh|sz).lianjia.com/chengjiao(/[a-z]+)?/$";
     //正则匹配翻页链接   https://gz.lianjia.com/ershoufang/tianhe/pg2
-    private  static final String urlIndex = "https://(gz|bj|sh|sz)\\.lianjia\\.com/ershoufang(/[a-z]+)?/pg\\d+/";
+    private  static final String urlIndex = "https://(gz|bj|sh|sz).lianjia.com/ershoufang(/[a-z]+)?/pg\\d+/";
     //成交翻页
-    private  static final String urlDealIndex = "https://(gz|bj|sh|sz)\\.lianjia\\.com/chengjiao(/[a-z]+)?/pg\\d+/";
+    private  static final String urlDealIndex = "https://(gz|bj|sh|sz).lianjia.com/chengjiao(/[a-z]+)?/pg\\d+/";
 
     private Site site = Site.me().setUserAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5").setRetryTimes(3).setSleepTime(100).setTimeOut(10000);
     private static Logger logger = LoggerFactory.getLogger(LianjiaSpider.class);
@@ -77,6 +77,7 @@ public class LianjiaSpider implements PageProcessor {
                 house.setAreaSubInfo(pageHtml.xpath("//div[@class='houseInfo']/div[@class='area']/div[@class='subInfo']/text(0)").toString());
                 house.setCommunityName(pageHtml.xpath("//div[@class='communityName']/a/text(0)").toString());
                 house.setAreaName(pageHtml.xpath("//div[@class='areaName']/span[@class='info']/allText()").toString());
+                house.setStatus(1);
             }
             if (page.getUrl().regex(urlDealDetail).match()) {
                 house.setTitle(pageHtml.xpath("//div[@class='wrapper']/text()").toString());

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="基于Elastic Stack的城市大数据分析系统" />
+    <meta name="description" content="基于Elastic Stack的城市大数据分析系统" />
+    <meta name="author" content="p9j7">
+    <title>基于Elastic Stack的城市大数据分析系统</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <!-- Custom fonts for this templates -->
+    <link th:href="@{/css/all.min.css}" rel="stylesheet" type="text/css" />
+    <!--<link href="css/all.min.css" rel="stylesheet" type="text/css">-->
+
+    <link th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic}" rel="stylesheet" type="text/css"/>
+    <!-- Plugin CSS -->
+    <link th:href="@{/css/magnific-popup.css}" rel="stylesheet" type="text/css"/>
+    <!-- Custom styles for this templates -->
+    <link th:href="@{/css/creative.min.css}" rel="stylesheet" type="text/css"/>
+</head>
+
+<body id="page-top">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">图说数据</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#services">提供服务</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#portfolio">特别声明</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">关于</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead text-center text-white d-flex">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="text-uppercase">
+                    <strong>基于Elastic Stack的城市大数据分析系统</strong>
+                </h1>
+                <hr>
+            </div>
+            <div class="col-lg-8 mx-auto">
+                <p class="text-faded mb-5">旨在提供历史房价和网签数据，帮助用户更好的评估房产和预测未来的走势</p>
+                <p class="text-faded mb-5">旨在提供空气质量指数信息，帮助用户更好的了解空气污染和宜居城市</p>
+                <!--<p class="text-faded mb-5">旨在提供中国各大城市历史空气质量数据，帮助用户更好的分析污染数据</p>-->
+                <a class="btn btn-success btn-lg js-scroll-trigger" href="/show">历史房价数据</a>
+                <a class="btn btn-success btn-lg js-scroll-trigger" href="https://sh.ershoufangdata.com">空气质量指数</a>
+                <!--<a class="btn btn-success btn-lg js-scroll-trigger" href="https://sz.ershoufangdata.com">广州</a>-->
+                <!--<a class="btn btn-success btn-lg js-scroll-trigger" href="https://hz.ershoufangdata.com">深圳</a>-->
+            </div>
+            <!--<div class="col-lg-8 mx-auto">-->
+                <!--<hr>-->
+                <!--&lt;!&ndash;<p class="text-faded mb-5">旨在提供北上广深历史房价和网签数据，帮助用户更好的评估房产和预测未来的走势</p>&ndash;&gt;-->
+                <!--<p class="text-faded mb-5">旨在提供中国各大城市历史空气质量数据，帮助用户更好的分析污染数据</p>-->
+                <!--<a class="btn btn-success btn-lg js-scroll-trigger" href="/bj">空气质量指数分析</a>-->
+            <!--</div>-->
+        </div>
+    </div>
+</header>
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">提供服务</h2>
+                <hr class="my-4">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-signal text-primary mb-3 sr-icon-1"></i>
+                    <h3 class="mb-3">历史成交分析</h3>
+                    <p class="text-muted mb-0">获取某个小区指定时间内的所有成交房源价格统计，了解价格走势</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-balance-scale  text-primary mb-3 sr-icon-2"></i>
+                    <h3 class="mb-3">调价房源信息</h3>
+                    <p class="text-muted mb-0">获取某个小区近期降价和涨价房源信息，了解房价波动情况</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-info text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">统计局官方数据分析</h3>
+                    <p class="text-muted mb-0">获取统计局官方二手房销售价格数据，并图表分析价格历史走势.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-flag text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">网签数据分析</h3>
+                    <p class="text-muted mb-0">获取最新网签数据统计信息，了解二手房成交情况</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-train text-primary mb-3 sr-icon-3"></i>
+                    <i class="fas fa-4x fa-subway text-primary mb-3 sr-icon-3"></i>
+                    <h3 class="mb-3">地铁周边信息</h3>
+                    <p class="text-muted mb-0">获取地铁站附近的小区房价信息.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-map text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">商圈周边小区</h3>
+                    <p class="text-muted mb-0">获取商圈内的所有小区房价信息.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-fire text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">楼市新闻热点</h3>
+                    <p class="text-muted mb-0">获取最新二手房市场新闻，了解楼市最新动态.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-gem text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">历史房源分析</h3>
+                    <p class="text-muted mb-0">获取某个小区内的所有成交房源信息统计,例如户型，装修等.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-paper-plane text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">小区周边信息</h3>
+                    <p class="text-muted mb-0">获取小区物业信息以及周边设施，例如学校，交通.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-dark text-white" id="portfolio">
+    <div class="container">
+        <h2 class="mb-5 pb-5 text-center">特别声明</h2>
+        <!--<li class="mb-5">本站成交房源数据包含成交日期和真实价格，可以真实反应某段时间内的二手房价格趋势。</li>-->
+        <li class="mb-5 ">本站二手房数据来自于<a href="https://lianjia.com/" target="_blank">链家网</a>官方发布。</li>
+        <li class="mb-5">所有二手房成交都需要进行网签，所以网签数据具有真实性、权威性特征。</li>
+        <li class="mb-5">本站空气质量数据来自于<a href="https://www.aqistudy.cn/historydata/" target="_blank">中国空气质量在线监测分析平台</a>官方发布。</li>
+        <li class="mb-5">中国空气质量在线监测分析平台是公益性质的软件平台，目前收录了367个城市的PM2.5及天气信息数据。</li>
+        <li class="mb-5">本网站数据仅供参考，如有任何问题，请依官方网站公布为准。</li>
+        <li class="mb-5">本网站仅供学习与交流，不用于商业用途。</li>
+    </div>
+</section>
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <p class="mb-5 text-muted"><a href="https://github.com/P9J7/elk-city" target="_blank">基于Elastic Stack的城市大数据分析系统</a> | Copyright &copy; 2019 P9J7</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="js/bootstrap.bundle.min.js"></script>-->
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- Plugin JavaScript -->
+<script type="text/javascript" th:src="@{/js/jquery.easing.min.js}"></script>
+<!--<script src="js/jquery.easing.min.js"></script>-->
+<!--<script src="js/scrollreveal.min.js"></script>-->
+<script type="text/javascript" th:src="@{/js/scrollreveal.min.js}"></script>
+<!--<script src="js/jquery.magnific-popup.min.js"></script>-->
+<script type="text/javascript" th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+<!-- Custom scripts for this templates -->
+<!--<script src="js/creative.min.js"></script>-->
+<script type="text/javascript" th:src="@{/js/creative.min.js}"></script>
+</body>
+
+</html>

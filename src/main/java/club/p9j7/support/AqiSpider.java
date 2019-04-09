@@ -31,7 +31,7 @@ public class AqiSpider implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        logger.debug("page:" + page.getHtml().toString());
+//        logger.debug("page:" + page.getHtml().toString());
         Map map = page.getRequest().getExtras();
         String city = (String) map.get("city");
         String response = null;
@@ -42,7 +42,7 @@ public class AqiSpider implements PageProcessor {
         }
         assert response != null;
         String data = response.substring(response.indexOf("["), response.indexOf("]") + 1);
-        logger.debug("aqiList:" + data);
+//        logger.debug("aqiList:" + data);
         List<Aqi> aqiList = JSONObject.parseArray(data, Aqi.class);
         for (Aqi aqi: aqiList) {
             aqi.setCity(city);

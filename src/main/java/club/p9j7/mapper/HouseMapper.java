@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Options;
 
 @Mapper
 public interface HouseMapper {
-    @Insert("insert into house(cityName,code,url,title,subtitle,favcount,price,unitprice,roomMainInfo,roomSubInfo,roomMainType,roomSubType,areaMainInfo,areaSubInfo,communityName,areaName) value (#{cityName},#{code},#{url},#{title},#{subtitle},#{favcount},#{price},#{unitprice},#{roomMainInfo},#{roomSubInfo},#{roomMainType},#{roomSubType},#{areaMainInfo},#{areaSubInfo},#{communityName},#{areaName})")
+    @Insert("insert into house(status,cityName,code,url,title,subtitle,favcount,price,unitprice,roomMainInfo,roomSubInfo,roomMainType,roomSubType,areaMainInfo,areaSubInfo,communityName,areaName) value (#{status},#{cityName},#{code},#{url},#{title},#{subtitle},#{favcount},#{price},#{unitprice},#{roomMainInfo},#{roomSubInfo},#{roomMainType},#{roomSubType},#{areaMainInfo},#{areaSubInfo},#{communityName},#{areaName})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void insertHouse(House house);
 }

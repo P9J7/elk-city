@@ -1,7 +1,12 @@
 package club.p9j7.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Document(indexName = "aqielk", type = "aqi")
 public class Aqi {
     private Integer id;
     private Integer aqi;
@@ -10,13 +15,13 @@ public class Aqi {
     private Integer pm10;
     private Integer so2;
     //todo co该为doublt????
-    private Integer co;
+    private BigDecimal co;
     private Integer no2;
     private Integer o3;
     private LocalDate timePoint;
     private String city;
 
-    public Aqi(Integer id, Integer aqi, Quality quality, Integer pm2_5, Integer pm10, Integer so2, Integer co, Integer no2, Integer o3, LocalDate timePoint, String city) {
+    public Aqi(Integer id, Integer aqi, Quality quality, Integer pm2_5, Integer pm10, Integer so2, BigDecimal co, Integer no2, Integer o3, LocalDate timePoint, String city) {
         this.id = id;
         this.aqi = aqi;
         this.quality = quality;
@@ -98,11 +103,11 @@ public class Aqi {
         this.so2 = so2;
     }
 
-    public Integer getCo() {
+    public BigDecimal getCo() {
         return co;
     }
 
-    public void setCo(Integer co) {
+    public void setCo(BigDecimal co) {
         this.co = co;
     }
 

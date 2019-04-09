@@ -17,7 +17,7 @@ public class LianjiaPipeline implements Pipeline {
     @Autowired
     HouseMapper houseMapper;
 
-    @Autowired(required = false)
+    @Autowired
     HouseElk houseElk;
 
     @Override
@@ -25,7 +25,7 @@ public class LianjiaPipeline implements Pipeline {
         House house = resultItems.get("house");
         if (house != null) {
             houseMapper.insertHouse(house);
-//            houseElk.save(house);
+            houseElk.save(house);
         }
     }
 }

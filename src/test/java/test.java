@@ -63,11 +63,12 @@ public class test {
     @Test
     public void testMybatis() {
         House house = new House();
-        house.setCode("108400246882");
+        house.setCode("10840024688266");
         house.setUrl("https://gz.lianjia.com/chengjiao/108400246502.html");
         house.setTitle("测试");
         house.setSubtitle("子标题");
         house.setFavcount(50);
+        house.setCityName("gz");
         house.setPrice(93.68);
         houseService.insertHouse(house);
     }

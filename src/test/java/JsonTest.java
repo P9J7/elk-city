@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,5 +47,11 @@ public class JsonTest {
             dd.add(Calendar.MONTH, 1);
         }
         System.out.println(nowDate);
+    }
+
+    @Test
+    public void testDecimal(){
+        BigDecimal bigDecimal = BigDecimal.valueOf(5.2);
+        System.out.println(bigDecimal);
     }
 }

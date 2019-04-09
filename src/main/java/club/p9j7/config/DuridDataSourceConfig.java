@@ -7,10 +7,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-@SuppressWarnings("unchecked")
+@Configuration
 public class DuridDataSourceConfig {
     @Bean
     @ConfigurationProperties("spring.datasource.druid")

@@ -1,15 +1,14 @@
 package club.p9j7.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import java.util.Date;
 
 @Document(indexName = "lianjiaelk", type = "house")
 public class House {
     //房屋id
     private String cityName;
 
+    @Id
     private Long id;
     //链家id
 

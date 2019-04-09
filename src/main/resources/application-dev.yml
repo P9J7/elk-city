@@ -11,8 +11,11 @@ spring:
   data:
     elasticsearch:
       repositories:
-        enabled: false
+        enabled: true
       cluster-nodes: 127.0.0.1:9300
+  thymeleaf:
+    cache: false
+    mode: HTML
 server:
   #chrome浏览器限制部分端口
   port: 8081
