@@ -1,5 +1,5 @@
 import club.p9j7.Application;
-import club.p9j7.controller.HouseController;
+import club.p9j7.controller.IndexController;
 import club.p9j7.model.House;
 import club.p9j7.service.HouseService;
 import club.p9j7.support.LianjiaSpider;
@@ -15,13 +15,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles(profiles = "dev")
 public class test {
     @Autowired
-    private HouseController indexController;
+    private IndexController indexController;
 
     @Autowired
     private LianjiaSpider lianjiaSpider;
@@ -63,10 +56,9 @@ public class test {
     @Test
     public void testMybatis() {
         House house = new House();
-        house.setCode("10840024688266");
+        house.setId(10840024688266L);
         house.setUrl("https://gz.lianjia.com/chengjiao/108400246502.html");
         house.setTitle("测试");
-        house.setSubtitle("子标题");
         house.setFavcount(50);
         house.setCityName("gz");
         house.setPrice(93.68);

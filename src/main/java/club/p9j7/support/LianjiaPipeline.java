@@ -14,8 +14,8 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 
 @Component
 public class LianjiaPipeline implements Pipeline {
-    @Autowired
-    HouseMapper houseMapper;
+//    @Autowired
+//    HouseMapper houseMapper;
 
     @Autowired
     HouseElk houseElk;
@@ -24,7 +24,7 @@ public class LianjiaPipeline implements Pipeline {
     public void process(ResultItems resultItems, Task task) {
         House house = resultItems.get("house");
         if (house != null) {
-            houseMapper.insertHouse(house);
+//            houseMapper.insertHouse(house);
             houseElk.save(house);
         }
     }

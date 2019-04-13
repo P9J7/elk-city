@@ -14,7 +14,6 @@ public class Aqi {
     private Integer pm2_5;
     private Integer pm10;
     private Integer so2;
-    //todo co该为doublt????
     private BigDecimal co;
     private Integer no2;
     private Integer o3;

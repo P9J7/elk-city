@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="基于Elastic Stack的城市大数据分析系统">
-    <meta name="author" content="p9j7">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>City-ElasticSearch</title>
+    <title>链家成交数据分析</title>
 
     <!-- Custom fonts for this templates-->
     <link th:href="@{/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -34,7 +34,7 @@
 
         <div th:replace="topbar"></div>
 
-        <div th:replace="content"></div>
+        <div th:replace="dealContent::content"></div>
 
         <div th:replace="footer"></div>
         <!--<div th:replace="footer"></div>-->
@@ -88,9 +88,7 @@
 <!-- Page level custom scripts -->
 <script th:src="@{/js/jquery.dataTables.js}"></script>
 <script th:src="@{/js/dataTables.bootstrap4.js}"></script>
-<script th:src="@{/js/chart-area-demo.js}"></script>
-<script th:src="@{/js/chart-pie-demo.js}"></script>
-<script th:src="@{/js/datatables-demo.js}"></script>
+<script th:src="@{/js/sale-area-chart.js}"></script>
 </body>
 
 </html>

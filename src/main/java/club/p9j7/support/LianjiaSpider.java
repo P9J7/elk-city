@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
@@ -56,32 +55,39 @@ public class LianjiaSpider implements PageProcessor {
 
         //如果当前爬取的为某个房子页面
         if (page.getUrl().regex(urlDetail).match() || page.getUrl().regex(urlDealDetail).match()) {
-            logger.debug("爬取未成交详情页");
+            logger.debug("爬取详情页");
             Html pageHtml = page.getHtml();
             String url = page.getUrl().toString();
             House house = new House();
             house.setCityName(url.substring(url.indexOf("/") + 2, url.indexOf(".")));
-            house.setCode(url.replaceAll("\\D",""));
+            house.setId(Long.parseLong(url.replaceAll("\\D","")));
             house.setUrl(url);
             if (page.getUrl().regex(urlDetail).match()) {
                 house.setTitle(pageHtml.xpath("//div[@class='content']/div[@class='title']/h1[@class='main']/@title").toString());
-                house.setSubtitle(pageHtml.xpath("//div[@class='content']/div[@class='title']/div[@class='sub']/@title").toString());
                 house.setFavcount(Integer.parseInt(pageHtml.xpath("//div[@class='action']/span[@class='count']/text(0)").toString()));
                 house.setPrice(Double.parseDouble(pageHtml.xpath("//div[@class='content']/div[@class='price ']/span[@class='total']/text(0)").toString()));
                 house.setUnitprice(Double.parseDouble(pageHtml.xpath("//div[@class='content']/div[@class='price ']//span[@class='unitPriceValue']/text(0)").toString().replaceAll("\"","")));
                 house.setRoomMainInfo(pageHtml.xpath("//div[@class='houseInfo']/div[@class='room']/div[@class='mainInfo']/text(0)").toString());
-                house.setRoomSubInfo(pageHtml.xpath("//div[@class='houseInfo']/div[@class='room']/div[@class='subInfo']/text(0)").toString());
-                house.setRoomMainType(pageHtml.xpath("//div[@class='houseInfo']/div[@class='type']/div[@class='mainInfo']/text(0)").toString());
-                house.setRoomSubType(pageHtml.xpath("//div[@class='houseInfo']/div[@class='type']/div[@class='subInfo']/text(0)").toString());
-                house.setAreaMainInfo(pageHtml.xpath("//div[@class='houseInfo']/div[@class='area']/div[@class='mainInfo']/text(0)").toString());
-                house.setAreaSubInfo(pageHtml.xpath("//div[@class='houseInfo']/div[@class='area']/div[@class='subInfo']/text(0)").toString());
+                house.setAreaMainInfo(Double.parseDouble(pageHtml.xpath("//div[@class='houseInfo']/div[@class='area']/div[@class='mainInfo']/text(0)").toString().replaceAll("\\D{2,}", "")));
+                house.setAreaSubInfo(pageHtml.xpath("//div[@class='houseInfo']/div[@class='area']/div[@class='subInfo']/text(0)").toString().split("/")[0].replaceAll("\\D+", ""));
                 house.setCommunityName(pageHtml.xpath("//div[@class='communityName']/a/text(0)").toString());
-                house.setAreaName(pageHtml.xpath("//div[@class='areaName']/span[@class='info']/allText()").toString());
+                String areaName = pageHtml.xpath("//div[@class='areaName']/span[@class='info']/allText()").toString();
+                //坑爹的全角空格
+                house.setAreaName(pageHtml.xpath("//div[@class='areaName']/span[@class='info']/allText()").toString().split("[\\s\\p{Zs}]+")[0]);
                 house.setStatus(1);
             }
             if (page.getUrl().regex(urlDealDetail).match()) {
-                house.setTitle(pageHtml.xpath("//div[@class='wrapper']/text()").toString());
-                house.setSubtitle(pageHtml.xpath("//div[@class='wrapper']/span/text()").toString());
+                String cRMAM = pageHtml.xpath("//div[@class='wrapper']/text()").toString();
+                house.setTitle(cRMAM);
+                String[] threeInfo = cRMAM.split("[\\s\\p{Zs}]+");
+                house.setCommunityName(threeInfo[0]);
+                house.setRoomMainInfo(threeInfo[1]);
+                //坑爹的正则匹配两次
+                house.setAreaMainInfo(Double.parseDouble(threeInfo[2].replaceAll("\\D{2,}", "")));
+                String date = pageHtml.xpath("//div[@class='wrapper']/span/text()").toString().split("[\\s\\p{Zs}]+")[0];
+                String[] yearMonth = date.split("\\.");
+                house.setDealYear(yearMonth[0]);
+                house.setDealMonth(yearMonth[1]);
                 house.setPrice(Double.parseDouble(pageHtml.xpath("//div[@class='price']/span[@class='dealTotalPrice']/i/text()").toString()));
                 house.setUnitprice(Double.parseDouble(pageHtml.xpath("//div[@class='price']/b/text(0)").toString()));
                 house.setStatus(2);

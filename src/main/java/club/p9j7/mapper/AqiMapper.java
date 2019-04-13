@@ -4,6 +4,7 @@ import club.p9j7.model.Aqi;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface AqiMapper {
     })
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     int insertAqiList(List<Aqi> aqiList);
+
+    @Select("select count(*) from aqi where city = #{city}")
+    int countByCity(String city);
 }

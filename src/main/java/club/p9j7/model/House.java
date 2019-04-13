@@ -1,52 +1,102 @@
 package club.p9j7.model;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Document(indexName = "lianjiaelk", type = "house")
-public class House {
-    //房屋id
-    private String cityName;
-
+public class House implements Serializable {
     @Id
     private Long id;
-    //链家id
 
-    private String code;
+    @Field(type = FieldType.Keyword)
+    private String dealYear;
+
+    @Field(type = FieldType.Keyword)
+    private String dealMonth;
+
+
+    @Field(type = FieldType.Keyword)
+    private String cityName;
+
+//    private String code;
     //链家网址
+    @Field(index = false, type = FieldType.Keyword)
     private String url;
 
+    @Field(index = false,type = FieldType.Keyword)
     private String title;
 
-    private String subtitle;
+//    private String subtitle;
     //关注人数
+
+    @Field(type = FieldType.Integer)
     private Integer favcount = 0 ;
 
     //总价
+
+    @Field(type = FieldType.Double)
     private Double price;
     //单价
+
+    @Field(type = FieldType.Double)
     private Double unitprice;
 
+    //房型
+    @Field(type = FieldType.Keyword)
     private String roomMainInfo;
 
-    private String roomSubInfo;
+//    private String roomSubInfo;
 
-    private String roomMainType;
+//    private String roomMainType;
 
-    private String roomSubType;
+//    private String roomSubType;
 
-    private String areaMainInfo;
+    //平方面积
 
+    @Field(type = FieldType.Double)
+    private Double areaMainInfo;
+
+    //建成年代
+    @Field(type = FieldType.Keyword)
     private String areaSubInfo;
     //小区名称
+    @Field(type = FieldType.Keyword)
     private String communityName;
     //所在区域
+    @Field(type = FieldType.Keyword)
     private String areaName;
     /**
      * 0:未处理；1:在售；2:已成交；-1:已经下架；-2：信息异常；-301：找不到
      */
 
+
+    @Field(type = FieldType.Integer)
     private Integer status;
+
+
+    public String getDealYear() {
+        return dealYear;
+    }
+
+    public void setDealYear(String dealYear) {
+        this.dealYear = dealYear;
+    }
+
+    public String getDealMonth() {
+        return dealMonth;
+    }
+
+    public void setDealMonth(String dealMonth) {
+        this.dealMonth = dealMonth;
+    }
 
     public String getCityName() {
         return cityName;
@@ -64,13 +114,13 @@ public class House {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
+//    public String getCode() {
+//        return code;
+//    }
+//
+//    public void setCode(String code) {
+//        this.code = code;
+//    }
 
     public String getUrl() {
         return url;
@@ -88,13 +138,13 @@ public class House {
         this.title = title;
     }
 
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
+//    public String getSubtitle() {
+//        return subtitle;
+//    }
+//
+//    public void setSubtitle(String subtitle) {
+//        this.subtitle = subtitle;
+//    }
 
     public Integer getFavcount() {
         return favcount;
@@ -128,35 +178,36 @@ public class House {
         this.roomMainInfo = roomMainInfo;
     }
 
-    public String getRoomSubInfo() {
-        return roomSubInfo;
-    }
+//    public String getRoomSubInfo() {
+//        return roomSubInfo;
+//    }
+//
+//    public void setRoomSubInfo(String roomSubInfo) {
+//        this.roomSubInfo = roomSubInfo;
+//    }
+//
+//    public String getRoomMainType() {
+//        return roomMainType;
+//    }
+//
+//    public void setRoomMainType(String roomMainType) {
+//        this.roomMainType = roomMainType;
+//    }
+//
+//    public String getRoomSubType() {
+//        return roomSubType;
+//    }
+//
+//    public void setRoomSubType(String roomSubType) {
+//        this.roomSubType = roomSubType;
+//    }
 
-    public void setRoomSubInfo(String roomSubInfo) {
-        this.roomSubInfo = roomSubInfo;
-    }
 
-    public String getRoomMainType() {
-        return roomMainType;
-    }
-
-    public void setRoomMainType(String roomMainType) {
-        this.roomMainType = roomMainType;
-    }
-
-    public String getRoomSubType() {
-        return roomSubType;
-    }
-
-    public void setRoomSubType(String roomSubType) {
-        this.roomSubType = roomSubType;
-    }
-
-    public String getAreaMainInfo() {
+    public Double getAreaMainInfo() {
         return areaMainInfo;
     }
 
-    public void setAreaMainInfo(String areaMainInfo) {
+    public void setAreaMainInfo(Double areaMainInfo) {
         this.areaMainInfo = areaMainInfo;
     }
 
@@ -195,20 +246,17 @@ public class House {
     @Override
     public String toString() {
         return "House{" +
-                "cityName='" + cityName + '\'' +
-                ", id=" + id +
-                ", code='" + code + '\'' +
+                "id=" + id +
+                ", dealYear='" + dealYear + '\'' +
+                ", dealMonth='" + dealMonth + '\'' +
+                ", cityName='" + cityName + '\'' +
                 ", url='" + url + '\'' +
                 ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
                 ", favcount=" + favcount +
                 ", price=" + price +
                 ", unitprice=" + unitprice +
                 ", roomMainInfo='" + roomMainInfo + '\'' +
-                ", roomSubInfo='" + roomSubInfo + '\'' +
-                ", roomMainType='" + roomMainType + '\'' +
-                ", roomSubType='" + roomSubType + '\'' +
-                ", areaMainInfo='" + areaMainInfo + '\'' +
+                ", areaMainInfo=" + areaMainInfo +
                 ", areaSubInfo='" + areaSubInfo + '\'' +
                 ", communityName='" + communityName + '\'' +
                 ", areaName='" + areaName + '\'' +
