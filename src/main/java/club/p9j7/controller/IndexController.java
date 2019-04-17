@@ -50,6 +50,7 @@ public class IndexController {
         mv.setViewName("deal");
         mv.addObject("city", hashMap.get(city));
         mv.addObject("areaHelp", city);
+        mv.addObject("statusHelp", 2);
         return mv;
     }
 
@@ -64,6 +65,7 @@ public class IndexController {
         mv.setViewName("sale");
         mv.addObject("city", hashMap.get(city));
         mv.addObject("areaHelp", city);
+        mv.addObject("statusHelp", 1);
         return mv;
     }
 

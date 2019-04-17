@@ -11,11 +11,11 @@ import java.util.List;
 public interface HouseElk extends ElasticsearchRepository<House, Long> {
     Integer countByCityName(String cityName);
 
-    Long countByAreaName(String areaName);
+    Integer countByAreaName(String areaName);
 
     Integer countByCityNameAndRoomMainInfoAndStatus(String cityName, String roomMainInfo, Integer status);
 
-    Long countByDealYear(String dealYear);
+    Integer countByCityNameAndDealYearAndDealMonth(String cityName, String dealYear, String dealMonth);
 
-
+    Integer countByCityNameAndAreaSubInfo(String cityName, String areaSubInfo);
 }

@@ -9,7 +9,7 @@ var getCityCount = $.ajax({
 }).done(function (results) {
     var labels = [], data = [];
     for (var i in results) {
-        labels.push(results[i].cityName);
+        labels.push(results[i].name);
         data.push(results[i].count);
     };
     var ctx = document.getElementById("myAreaChart");

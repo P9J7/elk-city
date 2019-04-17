@@ -1,4 +1,5 @@
 import club.p9j7.model.Aqi;
+import club.p9j7.model.City;
 import club.p9j7.model.House;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
@@ -56,6 +57,11 @@ public class JsonTest {
     public void testDecimal(){
         BigDecimal bigDecimal = BigDecimal.valueOf(5.2);
         System.out.println(bigDecimal);
+    }
+
+    @Test
+    public void testEnum(){
+        System.out.println(City.valueOf("bj").getValue());
     }
 
 }
