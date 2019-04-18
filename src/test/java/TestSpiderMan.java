@@ -1,18 +1,16 @@
 import club.p9j7.Application;
 import club.p9j7.model.Aqi;
-import club.p9j7.model.ResultContent;
+import club.p9j7.model.HouseResultContent;
 import club.p9j7.service.AqiElk;
 import club.p9j7.service.HouseElk;
 import club.p9j7.support.SpiderMan;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.TermsQueryBuilder;
+import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.avg.InternalAvg;
-import org.elasticsearch.search.aggregations.metrics.min.InternalMin;
-import org.elasticsearch.search.aggregations.metrics.min.MinAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.UnmappedTerms;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.test.context.ActiveProfiles;
@@ -49,16 +48,16 @@ public class TestSpiderMan {
 
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("gz");
+        spiderMan.crawlHouse("bj");
     }
 
     @Test
     public void testCityCount(){
-        List<ResultContent> cityList = new ArrayList<>();
+        List<HouseResultContent> cityList = new ArrayList<>();
         for (String city: SpiderMan.cityList) {
             Integer count = aqiElk.countByCity(city);
-            ResultContent resultContent = new ResultContent(city, count);
-            cityList.add(resultContent);
+            HouseResultContent houseResultContent = new HouseResultContent(city, count);
+            cityList.add(houseResultContent);
         }
         System.out.println(cityList.toString());
     }
@@ -70,9 +69,12 @@ public class TestSpiderMan {
 
     @Test
     public void testAqiElk(){
-        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(new MatchQueryBuilder("co", "0.9"))
-                .withPageable(new PageRequest(1,1)).build();
-        Page<Aqi> houses = aqiElk.search(searchQuery);
-        System.out.println(houses.getTotalElements());
+        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("timePoint.year").gte(2019);
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(rangeQueryBuilder).withFilter(QueryBuilders.rangeQuery("timePoint.month").gte(3))
+                .addAggregation(AggregationBuilders.terms("group_by_city").field("city.keyword").size(369)).build();
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("group_by_city");
+        List<StringTerms.Bucket> cityBuckets = stringTerms.getBuckets();
+        cityBuckets.forEach((city) -> System.out.println(city.getKeyAsString() + city.getDocCount()));
     }
 }

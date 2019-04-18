@@ -2,11 +2,11 @@ package club.p9j7.model;
 
 import java.io.Serializable;
 
-public class ResultContent<String, T> implements Serializable {
+public class HouseResultContent<String, T> implements Serializable {
     private String name;
     private T count;
 
-    public ResultContent(String name, T count) {
+    public HouseResultContent(String name, T count) {
         this.name = name;
         this.count = count;
     }
@@ -25,7 +25,7 @@ public class ResultContent<String, T> implements Serializable {
 
     @Override
     public java.lang.String toString() {
-        return "ResultContent{" +
+        return "HouseResultContent{" +
                 "name=" + name +
                 ", count=" + count +
                 '}';

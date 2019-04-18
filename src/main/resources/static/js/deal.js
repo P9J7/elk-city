@@ -56,7 +56,7 @@ var getAreaCount = $.ajax({
             datasets: [{
                 label: '成交数',
                 data: data,
-                backgroundColor: "#f0fff5",
+                backgroundColor: "rgba(240,245,255,0.7)",
                 borderColor: "#8775ff",
                 pointBackgroundColor: "#36A2EB",
                 pointBorderColor: "#fff"

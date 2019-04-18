@@ -27,8 +27,15 @@ $(document).ready(function() {
           "sAjaxDataProp":"",
           "ajax": "/getAqiCount",
           "columns": [
-              { "data": "name" },
-              { "data": "count" }
+              { "data": "cityName" ,"defaultContent": "0"},
+              { "data": "cityCount","defaultContent": "0" },
+              { "data": "qualityMap.严重污染","defaultContent": "0" },
+              { "data": "qualityMap.重度污染","defaultContent": "0" },
+              { "data": "qualityMap.中度污染","defaultContent": "0" },
+              { "data": "qualityMap.轻度污染","defaultContent": "0" },
+              { "data": "qualityMap.良","defaultContent": "0" },
+              { "data": "qualityMap.优","defaultContent": "0" },
+              { "data": "qualityMap.无","defaultContent": "0" }
           ]
       }
   )

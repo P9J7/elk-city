@@ -30,13 +30,18 @@ var getAreaCount = $.ajax({
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
-                    'rgba(220,20,60, 0.2)',
-                    'rgba(255,140,0, 0.2)',
+                    'rgba(220,20,60, 0.5)',
+                    'rgba(255,140,0, 0.5)',
                     'rgba(219,112,147, 0.2)',
                     'rgba(255,0,255, 0.2)',
-                    'rgba(123,104,238, 0.2)',
-                    'rgba(0,191,255, 0.2)',
-                    'rgba(0,250,154, 0.2)'
+                    'rgba(123,104,238, 0.7)',
+                    'rgba(0,191,255, 0.7)',
+                    'rgba(0,250,154, 0.2)',
+                    'rgb(153, 102, 255, 0.2)',
+                    'rgb(102, 153, 153, 0.2)',
+                    'rgb(51, 51, 153, 0.2)',
+                    'rgb(153, 51, 102, 0.2)',
+                    'rgb(255, 204, 153,0.2)'
 
                 ],
                 borderColor: [
@@ -50,7 +55,12 @@ var getAreaCount = $.ajax({
                     'rgba(255,0,255, 1)',
                     'rgba(123,104,238, 1)',
                     'rgba(0,191,255, 1)',
-                    'rgba(0,250,154, 1)'
+                    'rgba(0,250,154, 1)',
+                    'rgb(153, 102, 255, 1)',
+                    'rgb(102, 153, 153,1)',
+                    'rgb(51, 51, 153,1)',
+                    'rgb(153, 51, 102,1)',
+                    'rgb(255, 204, 153,1)'
                 ]
             }]
         }
@@ -140,14 +150,16 @@ var getConYear = $.ajax({
     };
     var ctx = document.getElementById("conYearChart");
     var myAreaChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: labels,
             datasets: [{
                 label: '建成年代',
                 data: data,
                 backgroundColor: 'rgba(102, 0, 255, 0.2)',
-                borderColor: 'rgba(102, 0, 255, 1)'
+                borderColor: 'rgba(102, 0, 255, 0.5)',
+                pointBackgroundColor: "#eb0023",
+                pointBorderColor: "#ff5010"
             }]
         }
     });

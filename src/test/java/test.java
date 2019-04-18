@@ -1,7 +1,6 @@
 import club.p9j7.Application;
 import club.p9j7.controller.IndexController;
 import club.p9j7.model.House;
-import club.p9j7.service.HouseService;
 import club.p9j7.support.LianjiaSpider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,8 +27,6 @@ public class test {
 
     @Autowired
     private LianjiaSpider lianjiaSpider;
-    @Autowired
-    private HouseService houseService;
 
     @Autowired
     private MockMvc mvc;
@@ -62,7 +59,6 @@ public class test {
         house.setFavcount(50);
         house.setCityName("gz");
         house.setPrice(93.68);
-        houseService.insertHouse(house);
     }
 
 
