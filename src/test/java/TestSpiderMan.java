@@ -7,10 +7,14 @@ import club.p9j7.support.SpiderMan;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
+import org.elasticsearch.search.aggregations.bucket.terms.DoubleTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.UnmappedTerms;
+import org.elasticsearch.search.aggregations.pipeline.PipelineAggregatorBuilders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +52,7 @@ public class TestSpiderMan {
 
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("bj");
+        spiderMan.crawlHouse("sz");
     }
 
     @Test
@@ -69,12 +73,21 @@ public class TestSpiderMan {
 
     @Test
     public void testAqiElk(){
-        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("timePoint.year").gte(2019);
-        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(rangeQueryBuilder).withFilter(QueryBuilders.rangeQuery("timePoint.month").gte(3))
-                .addAggregation(AggregationBuilders.terms("group_by_city").field("city.keyword").size(369)).build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
-        StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("group_by_city");
-        List<StringTerms.Bucket> cityBuckets = stringTerms.getBuckets();
-        cityBuckets.forEach((city) -> System.out.println(city.getKeyAsString() + city.getDocCount()));
+//        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("timePoint.year").gte(2019);
+//        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(rangeQueryBuilder).withFilter(QueryBuilders.rangeQuery("timePoint.month").gte(3))
+//                .addAggregation(AggregationBuilders.terms("group_by_city").field("city.keyword").size(369)).build();
+//        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+//        StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("group_by_city");
+//        List<StringTerms.Bucket> cityBuckets = stringTerms.getBuckets();
+//        cityBuckets.forEach((city) -> System.out.println(city.getKeyAsString() + city.getDocCount()));
+        //todo 尚未解决管道问题
+//        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
+//                .addAggregation(AggregationBuilders.dateHistogram("aqig").field("timePoint.year")
+//                        .dateHistogramInterval(DateHistogramInterval.YEAR).subAggregation(AggregationBuilders.sum("sumg").field("aqi")
+//                )).build();
+//        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+//        aggregations
+//        DoubleTerms doubleTerms = (DoubleTerms) aggregations.getAsMap().get("max_month_aqi_sum");
+
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.model.HttpRequestBody;
+import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 import us.codecraft.webmagic.utils.HttpConstant;
 
 import javax.script.ScriptException;
@@ -42,7 +43,7 @@ public class SpiderMan {
     public void crawlHouse(String city) {
         Spider houseSpider = null;
         if (city.equals("gz")) {
-            houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+            houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
             for (String area : gzArea) {
                 houseSpider.addUrl("https://gz.lianjia.com/ershoufang/" + area + "/");
                 houseSpider.addUrl("https://gz.lianjia.com/chengjiao/" + area + "/");
@@ -50,21 +51,21 @@ public class SpiderMan {
 
         }
         if (city.equals("sh")) {
-            houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+            houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
             for (String area : shArea) {
                 houseSpider.addUrl("https://sh.lianjia.com/ershoufang/" + area + "/");
                 houseSpider.addUrl("https://sh.lianjia.com/chengjiao/" + area + "/");
             }
         }
         if (city.equals("bj")) {
-            houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+            houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
             for (String area : bjArea) {
                 houseSpider.addUrl("https://bj.lianjia.com/ershoufang/" + area + "/");
                 houseSpider.addUrl("https://bj.lianjia.com/chengjiao/" + area + "/");
             }
         }
         if (city.equals("sz")) {
-            houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+            houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
             for (String area : szArea) {
                 houseSpider.addUrl("https://sz.lianjia.com/ershoufang/" + area + "/");
                 houseSpider.addUrl("https://sz.lianjia.com/chengjiao/" + area + "/");
@@ -75,7 +76,7 @@ public class SpiderMan {
 
     public void crawlHouse() {
         Spider houseSpider = null;
-        houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+        houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
         for (String area : gzArea) {
             houseSpider.addUrl("https://gz.lianjia.com/ershoufang/" + area + "/");
             houseSpider.addUrl("https://gz.lianjia.com/chengjiao/" + area + "/");
@@ -134,7 +135,7 @@ public class SpiderMan {
              */
             cityMonthRealMap.put(city, monthRealList);
         }
-        Spider airSpider = Spider.create(aqiSpider).addPipeline(aqiSpider.aqiPipeline).thread(5);
+        Spider airSpider = Spider.create(aqiSpider).setScheduler(new FileCacheQueueScheduler("D:\\aqiSpider")).addPipeline(aqiSpider.aqiPipeline).thread(5);
         /**
          * map 和 list 的 foreach 函数式编程
          */
