@@ -65,5 +65,13 @@ public class IndexController {
         return mv;
     }
 
+    @RequestMapping("/aqi/rank")
+    public String aqiRank() {
+        return "aqiRank";
+    }
 
+    @RequestMapping("/aqi/area")
+    public String aqiArea() {
+        return "aqiArea";
+    }
 }

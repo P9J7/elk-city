@@ -36,7 +36,8 @@ $(document).ready(function() {
               { "data": "qualityMap.良","defaultContent": "0" },
               { "data": "qualityMap.优","defaultContent": "0" },
               { "data": "qualityMap.无","defaultContent": "0" }
-          ]
+          ],
+          "order": [[ 1, "desc" ]]
       }
   )
 });
