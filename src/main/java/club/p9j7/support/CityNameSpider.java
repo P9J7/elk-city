@@ -20,7 +20,7 @@ public class CityNameSpider implements PageProcessor {
         List<String> cityList = page.getHtml().xpath("//div[@class='all']//li/a/text()").all();
         logger.info(String.valueOf(cityList.size()));
         logger.info(cityList.toString());
-        cityList.forEach(city -> System.out.print("\""+city+"\","));
+        cityList.forEach(city -> System.out.println("<option>"+city+"</option>"));
     }
 
     @Override

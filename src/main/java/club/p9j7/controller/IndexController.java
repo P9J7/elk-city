@@ -74,4 +74,9 @@ public class IndexController {
     public String aqiArea() {
         return "aqiArea";
     }
+
+    @RequestMapping("/aqi/compare")
+    public String aqiCompare() {
+        return "aqiCompare";
+    }
 }

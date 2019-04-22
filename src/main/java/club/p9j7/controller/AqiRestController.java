@@ -29,12 +29,12 @@ public class AqiRestController {
     AqiElk aqiElk;
 
     @RequestMapping("/getAqiCount")
-    public List<AqiResultContent> getCityAqiCount(){
+    public List<AqiResultContent> getCityAqiCount() {
         List<AqiResultContent> resultList = Collections.synchronizedList(new ArrayList<>());
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
                 .addAggregation(AggregationBuilders.terms("group_by_city").field("city.keyword").size(369)
                         .subAggregation(AggregationBuilders.terms("group_by_quality").field("quality.keyword")))
-                        .build();
+                .build();
         Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
         StringTerms cityTerms = (StringTerms) aggregations.getAsMap().get("group_by_city");
         List<StringTerms.Bucket> cityBuckets = cityTerms.getBuckets();
@@ -59,7 +59,7 @@ public class AqiRestController {
                 .must(QueryBuilders.matchQuery("timePoint.year", year))
                 .must(QueryBuilders.matchQuery("timePoint.monthValue", month)))
                 .addAggregation(AggregationBuilders.terms("group_by_city").field("city.keyword").size(369)
-                .subAggregation(AggregationBuilders.avg("avg_aqi_month").field("aqi"))
+                        .subAggregation(AggregationBuilders.avg("avg_aqi_month").field("aqi"))
                         .subAggregation(AggregationBuilders.avg("avg_pm2_5_month").field("pm2_5"))
                         .subAggregation(AggregationBuilders.avg("avg_pm10_month").field("pm10"))
                         .subAggregation(AggregationBuilders.avg("avg_so2_month").field("so2"))
@@ -116,5 +116,22 @@ public class AqiRestController {
             }
         });
         return resultContents;
+    }
+
+    @PostMapping("getAqiCompare")
+    public List<List<Double>> getAqiCompare(String city1, String city2, String date1, String date2, String type) {
+        List<List<Double>> lists = new ArrayList<>();
+        List<Double> city1List =  Arrays.asList(15d, 20d, 30.6, 400d);
+        List<Double> city2List = Arrays.asList(29d, 27d, 28d, 55d);
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.boolQuery()
+                .must(QueryBuilders.matchQuery("city.keyWord", city1))
+                .must(QueryBuilders.rangeQuery("timePoint.year")
+                        .from(date1.split("-")[0]).to(date2.split("-")[0]))
+                .must(QueryBuilders.rangeQuery("timepoint.monthValue")
+                        .from(date1.split("-")[1]).to(date2.split("-")[1]))
+                .must(QueryBuilders.rangeQuery("timePoint."))).build();
+        lists.add(city1List);
+        lists.add(city2List);
+        return lists;
     }
 }
