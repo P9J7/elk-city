@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 public class JsonTest {
@@ -62,6 +63,11 @@ public class JsonTest {
     @Test
     public void testEnum(){
         System.out.println(City.valueOf("bj").getValue());
+    }
+
+    @Test
+    public void testUUID(){
+        System.out.println(UUID.randomUUID().toString());;
     }
 
 }

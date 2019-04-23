@@ -435,7 +435,7 @@ $("#search").click(function () {
         myChart.setOption(option);
     })
 });
-//todo top10城市部分没有问题，标签显示问题
+
 
 $(document).ready(function () {
     var data = [];
@@ -443,8 +443,8 @@ $(document).ready(function () {
         url: '/getAqiArea',
         method: 'POST',
         data: {
-            year: 2013,
-            month: 12
+            year: 2014,
+            month: 1
         }
     }).done(function (results) {
         var myChart = echarts.init(document.getElementById('main'));

@@ -43,8 +43,8 @@ $(document).ready(function () {
                 "url": "/getAqiRank",
                 "type": "POST",
                 "data": {
-                    year:2013,
-                    month:12
+                    year:2014,
+                    month:1
                 }
             },
             "columns": [
@@ -60,7 +60,7 @@ $(document).ready(function () {
             ],
             "order": [[ 2, "desc" ]],
             "fnInitComplete": function () {
-                $('#yearMonthText').html('2013年12月')
+                $('#yearMonthText').html('2014年1月')
             }
         }
     )

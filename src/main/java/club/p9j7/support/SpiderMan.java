@@ -135,7 +135,7 @@ public class SpiderMan {
              */
             cityMonthRealMap.put(city, monthRealList);
         }
-        Spider airSpider = Spider.create(aqiSpider).setScheduler(new FileCacheQueueScheduler("D:\\aqiSpider")).addPipeline(aqiSpider.aqiPipeline).thread(5);
+        Spider airSpider = Spider.create(aqiSpider).addPipeline(aqiSpider.aqiPipeline).thread(5);
         /**
          * map 和 list 的 foreach 函数式编程
          */

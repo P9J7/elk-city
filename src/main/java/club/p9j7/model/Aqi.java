@@ -1,26 +1,41 @@
 package club.p9j7.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Document(indexName = "aqielk", type = "aqi")
+@Document(indexName = "aqi", type = "aqi")
 public class Aqi {
+    @Id
     private Integer id;
+    @Field(type = FieldType.Integer)
     private Integer aqi;
+    @Field(type = FieldType.Keyword)
     private Quality quality;
+    @Field(type = FieldType.Integer)
     private Integer pm2_5;
+    @Field(type = FieldType.Integer)
     private Integer pm10;
+    @Field(type = FieldType.Integer)
     private Integer so2;
+    @Field(type = FieldType.Double)
     private BigDecimal co;
+    @Field(type = FieldType.Integer)
     private Integer no2;
+    @Field(type = FieldType.Integer)
     private Integer o3;
-    private LocalDate timePoint;
+    @Field(type = FieldType.Date, format = DateFormat.date)
+    private String time_point;
+    @Field(type = FieldType.Keyword)
     private String city;
 
-    public Aqi(Integer id, Integer aqi, Quality quality, Integer pm2_5, Integer pm10, Integer so2, BigDecimal co, Integer no2, Integer o3, LocalDate timePoint, String city) {
+    public Aqi(Integer id, Integer aqi, Quality quality, Integer pm2_5, Integer pm10, Integer so2, BigDecimal co, Integer no2, Integer o3, String time_point, String city) {
         this.id = id;
         this.aqi = aqi;
         this.quality = quality;
@@ -30,7 +45,7 @@ public class Aqi {
         this.co = co;
         this.no2 = no2;
         this.o3 = o3;
-        this.timePoint = timePoint;
+        this.time_point = time_point;
         this.city = city;
     }
 
@@ -42,12 +57,12 @@ public class Aqi {
         this.city = city;
     }
 
-    public LocalDate getTimePoint() {
-        return timePoint;
+    public String getTime_point() {
+        return time_point;
     }
 
-    public void setTimePoint(LocalDate timePoint) {
-        this.timePoint = timePoint;
+    public void setTime_point(String time_point) {
+        this.time_point = time_point;
     }
 
     public Integer getId() {
@@ -138,7 +153,7 @@ public class Aqi {
                 ", co=" + co +
                 ", no2=" + no2 +
                 ", o3=" + o3 +
-                ", timePoint=" + timePoint +
+                ", time_point=" + time_point +
                 ", city='" + city + '\'' +
                 '}';
     }
