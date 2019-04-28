@@ -36,7 +36,7 @@ public class HouseRestController {
     @RequestMapping("/getCityCount")
     public List<HouseResultContent> getCityHouseCount() {
         List<HouseResultContent> cityList = new ArrayList<>();
-        String[] cityName = {"bj", "sh", "gz", "sz"};
+        String[] cityName = {"bj", "sh", "gz", "sz", "cq"};
         for (String city : cityName) {
             Integer count = houseElk.countByCityName(city);
             HouseResultContent houseResultContent = new HouseResultContent(City.valueOf(city).getValue(), count);

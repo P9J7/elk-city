@@ -22,6 +22,7 @@ public class SpiderMan {
     public final static String[] bjArea = {"dongcheng", "xicheng", "chaoyang", "haidian", "fengtai", "shijingshan", "tongzhou", "changping", "daxing", "yizhuangkaifaqu", "shunyi", "fangshan", "mentougou"};
     public final static String[] shArea = {"pudong", "minhang", "baoshan", "xuhui", "putuo", "yangpu", "changning", "songjiang", "jiading", "huangpu", "jingan", "zhabei", "hongkou", "qingpu", "fengxian"};
     public final static String[] szArea = {"luohuqu", "futianqu", "nanshanqu", "yantianqu", "baoanqu", "longgangqu", "longhuaqu"};
+    public final static String[] cqArea = {"jiangbei", "yubei", "nanan", "banan", "shapingba", "jiulongpo", "yuzhong", "jiangjing","beibei"};
     public final static Map<String, List<String>> areaMap = new HashMap<String, List<String>>();
     static {
         areaMap.put("gzArea", Arrays.asList("天河", "越秀", "荔湾", "海珠", "番禺", "白云", "黄埔", "从化", "增城", "花都", "南沙"));
@@ -42,6 +43,14 @@ public class SpiderMan {
 
     public void crawlHouse(String city) {
         Spider houseSpider = null;
+        if (city.equals("cq")) {
+            houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+            for (String area : cqArea) {
+                houseSpider.addUrl("https://cq.lianjia.com/ershoufang/" + area + "/");
+                houseSpider.addUrl("https://cq.lianjia.com/chengjiao/" + area + "/");
+            }
+
+        }
         if (city.equals("gz")) {
             houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
             for (String area : gzArea) {

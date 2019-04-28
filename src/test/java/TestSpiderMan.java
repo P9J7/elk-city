@@ -61,7 +61,7 @@ public class TestSpiderMan {
 
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("sz");
+        spiderMan.crawlHouse("cq");
     }
 
     @Test

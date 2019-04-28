@@ -64,7 +64,7 @@ var cityHouseMap = {
     'sz': [[22490, 1035]],
     '南宁': [[4118, 666]],
     '海口': [[1390, 204]],
-    '重庆': [[19424, 3017]],
+    'cq': [[19424, 3017]],
     '成都': [[13889, 1404]],
     '贵阳': [[3537, 432]],
     '昆明': [[4857, 643]],
@@ -758,7 +758,7 @@ $('#pm2_5-tab').click(function () {
                     name: '重庆',
                     type: 'scatter',
                     itemStyle: itemStyle,
-                    data: cityHouseMap['重庆']
+                    data: cityHouseMap['cq']
                 },
                 {
                     name: '成都',

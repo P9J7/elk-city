@@ -4,7 +4,8 @@ public enum City {
     bj("北京"),
     sh("上海"),
     gz("广州"),
-    sz("深圳");
+    sz("深圳"),
+    cq("重庆");
     private String value;
     private City(String value) {
         this.value = value;
