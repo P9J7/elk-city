@@ -79,4 +79,14 @@ public class IndexController {
     public String aqiCompare() {
         return "aqiCompare";
     }
+
+    @RequestMapping("/aqi/gdp")
+    public String houseSearch(){
+        return "aqiGDP";
+    }
+
+    @RequestMapping("/search")
+    public String search() {
+        return "search";
+    }
 }

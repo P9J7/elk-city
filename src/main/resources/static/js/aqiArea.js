@@ -1,3 +1,4 @@
+var myChart;
 $("#search").click(function () {
     var data = [];
     $.ajax({
@@ -8,7 +9,10 @@ $("#search").click(function () {
             month: $('#month').val()
         }
     }).done(function (results) {
-        var myChart = echarts.init(document.getElementById('main'));
+        if (myChart != null && myChart != "" && myChart != undefined) {
+            myChart.dispose();
+        }
+        myChart = echarts.init(document.getElementById('main'));
         for (var i in results) {
             data.push({
                 name: results[i].cityName,
@@ -447,7 +451,10 @@ $(document).ready(function () {
             month: 1
         }
     }).done(function (results) {
-        var myChart = echarts.init(document.getElementById('main'));
+        if (myChart != null && myChart != "" && myChart != undefined) {
+            myChart.dispose();
+        }
+        myChart = echarts.init(document.getElementById('main'));
         for (var i in results) {
             data.push({
                 name: results[i].cityName,

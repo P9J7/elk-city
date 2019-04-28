@@ -11,17 +11,17 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.InternalAggregations;
 import org.elasticsearch.search.aggregations.bucket.range.InternalRange;
 import org.elasticsearch.search.aggregations.bucket.range.RangeAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder;
 import org.elasticsearch.search.aggregations.metrics.avg.InternalAvg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -154,6 +154,22 @@ public class HouseRestController {
         List<InternalRange.Bucket> bucketList = internalRange.getBuckets();
         bucketList.forEach((item) -> {
             houseResultContents.add(new HouseResultContent(item.getKeyAsString(), item.getDocCount()));
+        });
+        return houseResultContents;
+    }
+
+    @GetMapping("/getCityAverPrice")
+    public List<HouseResultContent> getCityAverPrice() {
+        List<HouseResultContent> houseResultContents = new ArrayList<>();
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
+                .addAggregation(AggregationBuilders.terms("city").field("cityName").size(50)
+                        .subAggregation(AggregationBuilders.avg("aver_price").field("unitprice"))).build();
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
+        List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        buckets.forEach(item -> {
+            InternalAvg internalAvg = (InternalAvg) item.getAggregations().getAsMap().get("aver_price");
+            houseResultContents.add(new HouseResultContent(item.getKeyAsString(), internalAvg.getValue()));
         });
         return houseResultContents;
     }

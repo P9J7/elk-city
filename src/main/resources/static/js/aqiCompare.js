@@ -73,13 +73,13 @@ function flush() {
                 {
                     name: $('#city1').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city1',
                     data: data[0]
                 },
                 {
                     name: $('#city2').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city2',
                     data: data[1]
                 }
             ]
@@ -119,13 +119,13 @@ function flush() {
                 {
                     name: $('#city1').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city1',
                     data: data[2]
                 },
                 {
                     name: $('#city2').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city2',
                     data: data[3]
                 }
             ]
@@ -165,13 +165,13 @@ function flush() {
                 {
                     name: $('#city1').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city1',
                     data: data[4]
                 },
                 {
                     name: $('#city2').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city2',
                     data: data[5]
                 }
             ]
@@ -211,13 +211,13 @@ function flush() {
                 {
                     name: $('#city1').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city1',
                     data: data[6]
                 },
                 {
                     name: $('#city2').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city2',
                     data: data[7]
                 }
             ]
@@ -257,13 +257,13 @@ function flush() {
                 {
                     name: $('#city1').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city1',
                     data: data[8]
                 },
                 {
                     name: $('#city2').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city2',
                     data: data[9]
                 }
             ]
@@ -303,13 +303,13 @@ function flush() {
                 {
                     name: $('#city1').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city1',
                     data: data[10]
                 },
                 {
                     name: $('#city2').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city2',
                     data: data[11]
                 }
             ]
@@ -349,13 +349,13 @@ function flush() {
                 {
                     name: $('#city1').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city1',
                     data: data[12]
                 },
                 {
                     name: $('#city2').val(),
                     type: 'line',
-                    stack: '总量',
+                    stack: 'city2',
                     data: data[13]
                 }
             ]
