@@ -4,12 +4,8 @@ import club.p9j7.service.AqiElk;
 import club.p9j7.service.HouseElk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -35,33 +31,17 @@ public class IndexController {
         return mv;
     }
 
-    @RequestMapping("/deal/{city}")
-    public ModelAndView showDeal(@PathVariable("city")String city) {
+    @RequestMapping("/deal/fixedAnalysis")
+    public ModelAndView showDeal() {
         ModelAndView mv = new ModelAndView();
-        Map<String, String> hashMap = new HashMap<>();
-        hashMap.put("bj", "北京");
-        hashMap.put("sh", "上海");
-        hashMap.put("gz", "广州");
-        hashMap.put("sz", "深圳");
         mv.setViewName("deal");
-        mv.addObject("city", hashMap.get(city));
-        mv.addObject("areaHelp", city);
-        mv.addObject("statusHelp", 2);
         return mv;
     }
 
-    @RequestMapping("/sale/{city}")
-    public ModelAndView showSale(@PathVariable("city")String city) {
+    @RequestMapping("/sale/fixedAnalysis")
+    public ModelAndView showSale() {
         ModelAndView mv = new ModelAndView();
-        Map<String, String> hashMap = new HashMap<>();
-        hashMap.put("bj", "北京");
-        hashMap.put("sh", "上海");
-        hashMap.put("gz", "广州");
-        hashMap.put("sz", "深圳");
         mv.setViewName("sale");
-        mv.addObject("city", hashMap.get(city));
-        mv.addObject("areaHelp", city);
-        mv.addObject("statusHelp", 1);
         return mv;
     }
 

@@ -1,6 +1,4 @@
 import club.p9j7.model.Aqi;
-import club.p9j7.model.City;
-import club.p9j7.model.House;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,12 +7,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 public class JsonTest {
@@ -58,16 +53,6 @@ public class JsonTest {
     public void testDecimal(){
         BigDecimal bigDecimal = BigDecimal.valueOf(5.2);
         System.out.println(bigDecimal);
-    }
-
-    @Test
-    public void testEnum(){
-        System.out.println(City.valueOf("bj").getValue());
-    }
-
-    @Test
-    public void testUUID(){
-        System.out.println(UUID.randomUUID().toString());;
     }
 
 }

@@ -3,16 +3,64 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-        <h1 class="h3 mb-0 text-gray-800"><a class="text-primary ml-6" th:text="${city} + '链家在售数据分析'">链家在售数据分析</a></h1>
+        <h1 class="h3 mb-0 text-gray-800"><a class="text-primary ml-6">链家在售数据分析</a></h1>
     </div>
 
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-12 mb-4">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="cityName">选择城市</label>
+                        <select class="form-control text-primary" id="cityName" name="cityName">
+                            <option selected="selected">北京</option>
+                            <option>上海</option>
+                            <option>广州</option>
+                            <option>深圳</option>
+                            <option>重庆</option>
+                            <option>天津</option>
+                            <option>杭州</option>
+                            <option>南京</option>
+                            <option>西安</option>
+                            <option>成都</option>
+                            <option>石家庄</option>
+                            <option>郑州</option>
+                            <option>厦门</option>
+                            <option>武汉</option>
+                            <option>宁波</option>
+                            <option>沈阳</option>
+                            <option>太原</option>
+                            <option>哈尔滨</option>
+                            <option>青岛</option>
+                            <option>大连</option>
+                            <option>长春</option>
+                            <option>海口</option>
+                            <option>合肥</option>
+                            <option>福州</option>
+                            <option>南昌</option>
+                            <option>济南</option>
+                            <option>长沙</option>
+                            <option>南宁</option>
+                            <option>兰州</option>
+                            <option>贵阳</option>
+                            <option>昆明</option>
+                            <option>拉萨</option>
+                            <option>西宁</option>
+                            <option>银川</option>
+                            <option>呼和浩特</option>
+                            <option>乌鲁木齐</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="search">分析</button>
+                </div>
+            </div>
+        </div>
     <div class="row">
         <div class="col-xl-6 col-lg-6">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <!--这个id 和 href 帮了大忙-->
-                    <h6 id="areaHelp" th:href="${areaHelp}" class="m-0 font-weight-bold text-primary">
-                        区域分析</h6>
+                    <h6 id="areaHelp" class="m-0 font-weight-bold text-primary">
+                        在售区域分析</h6>
                 </div>
                 <div class="card-body">
                     <canvas id="myAreaChart"></canvas>
@@ -23,7 +71,7 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        区域均价分析</h6>
+                        在售均价分析</h6>
                 </div>
                 <div class="card-body">
                     <canvas id="areaAverChart"></canvas>
@@ -34,7 +82,7 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        户型分析</h6>
+                        在售户型分析</h6>
                 </div>
                 <div class="card-body">
                     <canvas id="myHouseTypeChart"></canvas>
@@ -45,7 +93,7 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        楼龄分析</h6>
+                        在售楼龄分析</h6>
                 </div>
                 <div class="card-body">
                     <canvas id="conYearChart"></canvas>

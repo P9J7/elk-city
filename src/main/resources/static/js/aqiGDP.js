@@ -481,7 +481,7 @@ $(document).ready(function () {
 
 });
 
-$('#pm2_5-tab').click(function () {
+$(document).ready(function () {
     $.ajax({
         url: '/getCityAverPrice',
         method: 'GET'

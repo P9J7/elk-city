@@ -24,11 +24,18 @@ public class SpiderMan {
     public final static String[] szArea = {"luohuqu", "futianqu", "nanshanqu", "yantianqu", "baoanqu", "longgangqu", "longhuaqu"};
     public final static String[] cqArea = {"jiangbei", "yubei", "nanan", "banan", "shapingba", "jiulongpo", "yuzhong", "jiangjing","beibei"};
     public final static Map<String, List<String>> areaMap = new HashMap<String, List<String>>();
+    public final static Map<String, String> cityMap = new HashMap<>();
     static {
         areaMap.put("gzArea", Arrays.asList("天河", "越秀", "荔湾", "海珠", "番禺", "白云", "黄埔", "从化", "增城", "花都", "南沙"));
         areaMap.put("bjArea", Arrays.asList("东城", "西城", "朝阳", "海淀", "丰台", "石景山", "通州", "昌平", "大兴", "亦庄开发区", "顺义", "房山", "门头沟"));
         areaMap.put("shArea", Arrays.asList("浦东", "闵行", "宝山", "徐汇", "普陀", "杨浦", "长宁", "松江", "嘉定", "黄浦", "静安", "闸北", "虹口", "青浦", "奉贤"));
         areaMap.put("szArea", Arrays.asList("罗湖区", "福田区", "南山区", "盐田区", "宝安区", "龙岗区", "龙华区"));
+        areaMap.put("cqArea", Arrays.asList("江北", "渝北", "南岸", "巴南", "沙坪坝", "九龙坡", "渝中", "北碚"));
+        cityMap.put("广州", "gz");
+        cityMap.put("北京", "bj");
+        cityMap.put("上海", "sh");
+        cityMap.put("深圳", "sz");
+        cityMap.put("重庆", "cq");
     }
     private List<String> monthList = new ArrayList<>();
     private Map<String, List<String>> cityMonthRealMap = new HashMap<>();

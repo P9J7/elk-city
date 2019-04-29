@@ -41,53 +41,15 @@
                 <h1 class="h3 mb-0 text-gray-800"><a class="text-success ml-6">GDP-人口-分布图</a></h1>
             </div>
 
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <select class="form-control text-primary" id="year" name="year">
-                                <option>2014</option>
-                                <option>2015</option>
-                                <option>2016</option>
-                                <option>2017</option>
-                                <option>2018</option>
-                                <option>2019</option>
-                            </select>
-                            <label for="year">年</label>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control text-primary" id="month" name="month">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                            </select>
-                        </div>
-                        <label for="month">月</label>
-                        <button type="submit" class="btn btn-primary" id="search">搜索</button>
-                    </div>
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                </div>
-                <!-- Content Row -->
-            </div>
+
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="aqi-tab" data-toggle="tab" href="#aqi" role="tab" aria-controls="aqi"
-                       aria-selected="true">经济-人口-AQI</a>
+                    <a class="nav-link active" id="pm2_5-tab" data-toggle="tab" href="#pm2_5" role="tab" aria-controls="pm2_5"
+                       aria-selected="true">经济-人口-房价</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pm2_5-tab" data-toggle="tab" href="#pm2_5" role="tab" aria-controls="pm2_5"
-                       aria-selected="false">经济-人口-房价</a>
+                    <a class="nav-link" id="aqi-tab" data-toggle="tab" href="#aqi" role="tab" aria-controls="aqi"
+                       aria-selected="false">经济-人口-AQI</a>
                 </li>
                 <!--<li class="nav-item">-->
                     <!--<a class="nav-link" id="pm10-tab" data-toggle="tab" href="#pm10" role="tab" aria-controls="pm10"-->
@@ -95,14 +57,53 @@
                 <!--</li>-->
             </ul>
             <div class="tab-content mb-5 mt-5" id="myTabContent">
-                <div class="tab-pane fade show active" id="aqi" role="tabpanel" aria-labelledby="aqi-tab">
+                <div class="tab-pane fade" id="aqi" role="tabpanel" aria-labelledby="aqi-tab">
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <select class="form-control text-primary" id="year" name="year">
+                                        <option>2014</option>
+                                        <option>2015</option>
+                                        <option>2016</option>
+                                        <option>2017</option>
+                                        <option>2018</option>
+                                        <option>2019</option>
+                                    </select>
+                                    <label for="year">年</label>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control text-primary" id="month" name="month">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                    </select>
+                                </div>
+                                <label for="month">月</label>
+                                <button type="submit" class="btn btn-primary" id="search">搜索</button>
+                            </div>
+                        </div>
+                        <!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                        </div>
+                        <!-- Content Row -->
+                    </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="main" style="width: 1200px;height: 800px"></div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pm2_5" role="tabpanel" aria-labelledby="pm2_5-tab">
+                <div class="tab-pane fade show active" id="pm2_5" role="tabpanel" aria-labelledby="pm2_5-tab">
                     <div class="col-lg-12">
                         <div id="main1" style="width: 1200px;height: 800px"></div>
                     </div>
