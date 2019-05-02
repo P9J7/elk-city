@@ -1,6 +1,7 @@
 package club.p9j7.controller;
 
 
+import club.p9j7.model.House;
 import club.p9j7.model.HouseResultContent;
 import club.p9j7.service.HouseElk;
 import club.p9j7.support.SpiderMan;
@@ -10,12 +11,16 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.BucketOrder;
 import org.elasticsearch.search.aggregations.bucket.range.InternalRange;
 import org.elasticsearch.search.aggregations.bucket.range.RangeAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder;
 import org.elasticsearch.search.aggregations.metrics.avg.InternalAvg;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
@@ -25,7 +30,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
+@SuppressWarnings("Duplicates")
 @RestController
 public class HouseRestController {
     @Autowired
@@ -162,14 +170,101 @@ public class HouseRestController {
         List<HouseResultContent> houseResultContents = new ArrayList<>();
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
                 .addAggregation(AggregationBuilders.terms("city").field("cityName").size(50)
-                        .subAggregation(AggregationBuilders.avg("aver_price").field("unitprice"))).build();
+                        .subAggregation(AggregationBuilders.avg("aver_price").field("unitprice"))
+                        .order(BucketOrder.aggregation("aver_price", false))).build();
         Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
         StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
         List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
         buckets.forEach(item -> {
             InternalAvg internalAvg = (InternalAvg) item.getAggregations().getAsMap().get("aver_price");
-            houseResultContents.add(new HouseResultContent(item.getKeyAsString(), internalAvg.getValue()));
+            houseResultContents.add(new HouseResultContent(SpiderMan.mapCity.get(item.getKeyAsString()), internalAvg.getValue()));
         });
         return houseResultContents;
+    }
+
+    //城市区域均价分析
+    @GetMapping("/getMaxAverPrice")
+    public List<HouseResultContent> getMaxAverPrice() {
+        List<HouseResultContent> houseResultContents = new ArrayList<>();
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery("status", 1))
+                .addAggregation(AggregationBuilders.terms("city").field("cityName").size(50)
+                        .subAggregation(AggregationBuilders.terms("area").field("areaName")
+                                .subAggregation(AggregationBuilders.avg("aver_price").field("unitprice"))
+                                .order(BucketOrder.aggregation("aver_price", false)))
+                        ).build();
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
+        List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        buckets.forEach(item -> {
+            StringTerms stringTerms1 = (StringTerms) item.getAggregations().getAsMap().get("area");
+            List<StringTerms.Bucket> buckets1 = stringTerms1.getBuckets();
+            InternalAvg internalAvg = (InternalAvg) buckets1.get(0).getAggregations().getAsMap().get("aver_price");
+            String cityArea = SpiderMan.mapCity.get(item.getKeyAsString()) + "." + buckets1.get(0).getKeyAsString();
+            houseResultContents.add(new HouseResultContent(cityArea, internalAvg.getValue()));
+            });
+        houseResultContents.sort(Comparator.comparingDouble(o1 -> (double) o1.getCount()));
+        Collections.reverse(houseResultContents);
+        return houseResultContents;
+    }
+
+    //关注度最高的房分析
+    @GetMapping("/getMaxFav")
+    public List<House> getMaxFav() {
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
+                .withSort(SortBuilders.fieldSort("favcount").order(SortOrder.DESC))
+                .withPageable(PageRequest.of(1,100)).build();
+        List<House> houseList = elasticsearchTemplate.queryForList(searchQuery, House.class);
+        AtomicInteger i = new AtomicInteger(1);
+        houseList.forEach(item -> {
+            item.setId(i.longValue());
+            i.getAndIncrement();
+            item.setCityName(SpiderMan.mapCity.get(item.getCityName()));
+        });
+        return houseList;
+    }
+
+    //关注度top100户型分析
+    @GetMapping("/getMaxHouseType")
+    public List<HouseResultContent> getMaxHouseType() {
+        List<HouseResultContent> houseResultContents = new ArrayList<>();
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
+                .withSort(SortBuilders.fieldSort("favcount").order(SortOrder.DESC))
+                .withPageable(PageRequest.of(1,100)).build();
+        List<House> houseList = elasticsearchTemplate.queryForList(searchQuery, House.class);
+        Map<String, List<House>> groupList = houseList.stream().collect(Collectors.groupingBy(House::getRoomMainInfo));
+        groupList.forEach((k,v) -> houseResultContents.add(new HouseResultContent(k, v.size())));
+        return houseResultContents;
+    }
+
+    //关注度top100房龄分析
+    @GetMapping("/getMaxCon")
+    public List<HouseResultContent> getMaxCon() {
+        List<HouseResultContent> houseResultContents = new ArrayList<>();
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
+                .withSort(SortBuilders.fieldSort("favcount").order(SortOrder.DESC))
+                .withPageable(PageRequest.of(1,100)).build();
+        List<House> houseList = elasticsearchTemplate.queryForList(searchQuery, House.class);
+        Map<String, List<House>> groupList = houseList.stream().collect(Collectors.groupingBy(House::getAreaSubInfo));
+        groupList.forEach((k,v) -> {
+            if (v.size() > 3)
+            houseResultContents.add(new HouseResultContent(k, v.size()));
+        });
+        return houseResultContents;
+    }
+
+    @GetMapping("/getMaxArea")
+    public List<List<Double>> getMaxArea() {
+        List<List<Double>> results = new ArrayList<>();
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
+                .withSort(SortBuilders.fieldSort("favcount").order(SortOrder.DESC))
+                .withPageable(PageRequest.of(1,100)).build();
+        List<House> houseList = elasticsearchTemplate.queryForList(searchQuery, House.class);
+        houseList.forEach(item -> {
+            List<Double> list = new ArrayList<>();
+            list.add(item.getAreaMainInfo());
+            list.add(item.getPrice());
+            results.add(list);
+        });
+        return results;
     }
 }

@@ -25,6 +25,7 @@ public class SpiderMan {
     public final static String[] cqArea = {"jiangbei", "yubei", "nanan", "banan", "shapingba", "jiulongpo", "yuzhong", "jiangjing","beibei"};
     public final static Map<String, List<String>> areaMap = new HashMap<String, List<String>>();
     public final static Map<String, String> cityMap = new HashMap<>();
+    public final static Map<String, String> mapCity = new HashMap<>();
     static {
         areaMap.put("gzArea", Arrays.asList("天河", "越秀", "荔湾", "海珠", "番禺", "白云", "黄埔", "从化", "增城", "花都", "南沙"));
         areaMap.put("bjArea", Arrays.asList("东城", "西城", "朝阳", "海淀", "丰台", "石景山", "通州", "昌平", "大兴", "亦庄开发区", "顺义", "房山", "门头沟"));
@@ -36,6 +37,11 @@ public class SpiderMan {
         cityMap.put("上海", "sh");
         cityMap.put("深圳", "sz");
         cityMap.put("重庆", "cq");
+        mapCity.put("bj", "北京");
+        mapCity.put("sh", "上海");
+        mapCity.put("gz", "广州");
+        mapCity.put("sz", "深圳");
+        mapCity.put("cq", "重庆");
     }
     private List<String> monthList = new ArrayList<>();
     private Map<String, List<String>> cityMonthRealMap = new HashMap<>();

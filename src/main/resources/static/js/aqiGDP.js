@@ -38,7 +38,7 @@ var cityAQIMap = {
 };
 
 var cityHouseMap = {
-    'bj': [[28014, 1961]],
+    '北京': [[28014, 1961]],
     '天津': [[18549, 1293]],
     '石家庄': [[6460, 1016]],
     '太原': [[3382, 420]],
@@ -47,7 +47,7 @@ var cityHouseMap = {
     '大连': [[7363, 669]],
     '长春': [[6530, 767]],
     '哈尔滨': [[6355, 536]],
-    'sh': [[30632, 2301]],
+    '上海': [[30632, 2301]],
     '南京': [[11715, 800]],
     '杭州': [[12603, 870]],
     '宁波': [[9842, 760]],
@@ -60,11 +60,11 @@ var cityHouseMap = {
     '郑州': [[9130, 862]],
     '武汉': [[13410, 821]],
     '长沙': [[10535, 704]],
-    'gz': [[21503, 1270]],
-    'sz': [[22490, 1035]],
+    '广州': [[21503, 1270]],
+    '深圳': [[22490, 1035]],
     '南宁': [[4118, 666]],
     '海口': [[1390, 204]],
-    'cq': [[19424, 3017]],
+    '重庆': [[19424, 3017]],
     '成都': [[13889, 1404]],
     '贵阳': [[3537, 432]],
     '昆明': [[4857, 643]],
@@ -602,25 +602,25 @@ $(document).ready(function () {
                     name: '北京',
                     type: 'scatter',
                     itemStyle: itemStyle,
-                    data: cityHouseMap['bj']
+                    data: cityHouseMap['北京']
                 },
                 {
                     name: '上海',
                     type: 'scatter',
                     itemStyle: itemStyle,
-                    data: cityHouseMap['sh']
+                    data: cityHouseMap['上海']
                 },
                 {
                     name: '深圳',
                     type: 'scatter',
                     itemStyle: itemStyle,
-                    data: cityHouseMap['sz']
+                    data: cityHouseMap['深圳']
                 },
                 {
                     name: '广州',
                     type: 'scatter',
                     itemStyle: itemStyle,
-                    data: cityHouseMap['gz']
+                    data: cityHouseMap['广州']
                 },
                 {
                     name: '天津',
@@ -758,7 +758,7 @@ $(document).ready(function () {
                     name: '重庆',
                     type: 'scatter',
                     itemStyle: itemStyle,
-                    data: cityHouseMap['cq']
+                    data: cityHouseMap['重庆']
                 },
                 {
                     name: '成都',

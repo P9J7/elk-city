@@ -65,8 +65,23 @@ public class IndexController {
         return "aqiGDP";
     }
 
-    @RequestMapping("/search")
+    @RequestMapping("/house/averPrice")
     public String search() {
-        return "search";
+        return "houseAverPrice";
+    }
+
+    @RequestMapping("/house/favCount")
+    public String favCount() {
+        return "houseFavCount";
+    }
+
+    @RequestMapping("/house/compare")
+    public String houseCompare() {
+        return "houseCompare";
+    }
+
+    @RequestMapping("/aqi/observe")
+    public String aqiObserve() {
+        return "aqiObserve";
     }
 }

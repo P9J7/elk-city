@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -186,5 +185,26 @@ public class AqiRestController {
         lists.add(o31List);
         lists.add(o32List);
         return lists;
+    }
+
+    @RequestMapping("/getAqiObserve")
+    public Map<String, List<String>> getAqiObserve(String city) {
+        List<String> aqiContents = Collections.synchronizedList(new ArrayList<>());
+        List<String> dateContents = Collections.synchronizedList(new ArrayList<>());
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.boolQuery()
+                .must(QueryBuilders.rangeQuery("time_point").from("2014-01-01").to("2019-04-01"))
+                .must(QueryBuilders.matchQuery("city", city)))
+                .withSort(SortBuilders.fieldSort("time_point"))
+                .withPageable(PageRequest.of(0, 3000))
+                .build();
+        List<Aqi> aqiList = elasticsearchTemplate.queryForList(searchQuery, Aqi.class);
+        aqiList.forEach(item -> {
+            aqiContents.add(String.valueOf(item.getAqi()));
+            dateContents.add(item.getTime_point());
+        });
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("aqiData", aqiContents);
+        map.put("timeData", dateContents);
+        return map;
     }
 }
