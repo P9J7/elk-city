@@ -12,7 +12,7 @@
     <div class="row">
 
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -31,7 +31,7 @@
         </div>
 
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -50,83 +50,83 @@
         </div>
 
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">系统开发</div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">70%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 70%"
-                                             aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="col-xl-3 col-md-6 mb-4">-->
+            <!--<div class="card border-left-info shadow h-100 py-2">-->
+                <!--<div class="card-body">-->
+                    <!--<div class="row no-gutters align-items-center">-->
+                        <!--<div class="col mr-2">-->
+                            <!--<div class="text-xs font-weight-bold text-info text-uppercase mb-1">系统开发</div>-->
+                            <!--<div class="row no-gutters align-items-center">-->
+                                <!--<div class="col-auto">-->
+                                    <!--<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">70%</div>-->
+                                <!--</div>-->
+                                <!--<div class="col">-->
+                                    <!--<div class="progress progress-sm mr-2">-->
+                                        <!--<div class="progress-bar bg-info" role="progressbar" style="width: 70%"-->
+                                             <!--aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-auto">-->
+                            <!--<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
-        <!-- Pending Requests Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">等待开发
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!--&lt;!&ndash; Pending Requests Card Example &ndash;&gt;-->
+        <!--<div class="col-xl-3 col-md-6 mb-4">-->
+            <!--<div class="card border-left-warning shadow h-100 py-2">-->
+                <!--<div class="card-body">-->
+                    <!--<div class="row no-gutters align-items-center">-->
+                        <!--<div class="col mr-2">-->
+                            <!--<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">等待开发-->
+                            <!--</div>-->
+                            <!--<div class="h5 mb-0 font-weight-bold text-gray-800">2</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-auto">-->
+                            <!--<i class="fas fa-comments fa-2x text-gray-300"></i>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <!-- Content Row -->
 
     <div class="row">
 
         <!-- Area Chart -->
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">房产数据总览</h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="myAreaChart"></canvas>
+                    <div id="main" style="width: 1200px;height:500px;"></div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">系统概述</h6>
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <img class="img-fluid px-3 px-sm-4 mt-4 mb-4" style="width: 15rem;" src="img/undraw_visual_data_b1wx.svg" alt="">
-                    </div>
-                    <p>本系统房产数据爬取于<a target="_blank" rel="nofollow" href="https://lianjia.com/">链家网</a>, 空气质量数据爬取于<a target="_blank" rel="nofollow" href="https://www.aqistudy.cn/historydata/">中国空气质量在线监测分析平台</a>。仅供学习交流使用！</p>
-                    <a rel="nofollow" href="#">了解更多 &rarr;</a>
-                </div>
-            </div>
-        </div>
+        <!--<div class="col-lg-6">-->
+            <!--<div class="card shadow mb-4">-->
+                <!--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">-->
+                    <!--<h6 class="m-0 font-weight-bold text-primary">系统概述</h6>-->
+                <!--</div>-->
+                <!--<div class="card-body">-->
+                    <!--<div class="text-center">-->
+                        <!--<img class="img-fluid px-3 px-sm-4 mt-4 mb-4" style="width: 15rem;" src="img/undraw_visual_data_b1wx.svg" alt="">-->
+                    <!--</div>-->
+                    <!--<p>本系统房产数据爬取于<a target="_blank" rel="nofollow" href="https://lianjia.com/">链家网</a>, 空气质量数据爬取于<a target="_blank" rel="nofollow" href="https://www.aqistudy.cn/historydata/">中国空气质量在线监测分析平台</a>。仅供学习交流使用！</p>-->
+                    <!--<a rel="nofollow" href="#">了解更多 &rarr;</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <!-- Pie Chart -->
-        <div class="col-xl-12 col-lg-6">
+        <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -134,7 +134,6 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="table-responsive">
                         <table class="table table-hover table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
@@ -163,7 +162,6 @@
                             </tr>
                             </tfoot>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>

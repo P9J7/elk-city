@@ -3,6 +3,7 @@ import club.p9j7.model.Aqi;
 import club.p9j7.model.HouseResultContent;
 import club.p9j7.service.AqiElk;
 import club.p9j7.service.HouseElk;
+import club.p9j7.support.LianjiaSpider;
 import club.p9j7.support.SpiderMan;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -18,6 +19,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import us.codecraft.webmagic.Spider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ public class TestSpiderMan {
     AqiElk aqiElk;
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
+    @Autowired
+    LianjiaSpider lianjiaSpider;
 
 
     @Test
@@ -43,7 +47,14 @@ public class TestSpiderMan {
 
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("cs");
+        spiderMan.crawlHouse("xa");
+    }
+
+    @Test
+    public void secondCrawl(){
+        Spider houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+        houseSpider.addUrl("https://cq.lianjia.com/chengjiao/jiangjing/");
+        houseSpider.run();
     }
 
     @Test
