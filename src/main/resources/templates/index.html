@@ -4,19 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="基于Elastic Stack的城市大数据分析系统" />
-    <meta name="description" content="基于Elastic Stack的城市大数据分析系统" />
+    <meta name="keywords" content="基于Elastic Stack的城市大数据分析系统"/>
+    <meta name="description" content="基于Elastic Stack的城市大数据分析系统"/>
     <meta name="author" content="p9j7">
     <title>基于Elastic Stack的城市大数据分析系统</title>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
 
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
     <!-- Custom fonts for this templates -->
-    <link th:href="@{/css/all.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/all.min.css}" rel="stylesheet" type="text/css"/>
     <!--<link href="css/all.min.css" rel="stylesheet" type="text/css">-->
 
-    <link th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800}"
+          rel="stylesheet" type="text/css"/>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic}"
+          rel="stylesheet" type="text/css"/>
     <!-- Plugin CSS -->
     <link th:href="@{/css/magnific-popup.css}" rel="stylesheet" type="text/css"/>
     <!-- Custom styles for this templates -->
@@ -28,7 +30,9 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">图说数据</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -56,8 +60,8 @@
                 <hr>
             </div>
             <div class="col-lg-8 mx-auto">
-                <p class="text-faded mb-5">旨在提供历史房价和网签数据，帮助用户更好的评估房产和预测未来的走势</p>
-                <p class="text-faded mb-5">旨在提供空气质量指数信息，帮助用户更好的了解空气污染和宜居城市</p>
+                <p class="text-faded mb-5">旨在提供一个快速，稳定，可靠的城市大数据分析平台</p>
+                <p class="text-faded mb-5">帮助用户直观高效的了解房价波动和空气污染指数变化</p>
                 <a class="btn btn-success btn-lg js-scroll-trigger" href="/show">进入系统</a>
             </div>
 
@@ -79,65 +83,66 @@
                 <div class="service-box mt-5 mx-auto">
                     <i class="fas fa-4x fa-yen-sign text-primary mb-3 sr-icon-1"></i>
                     <h3 class="mb-3">历史成交分析</h3>
-                    <p class="text-muted mb-0">获取北上广深指定时间内的所有成交房源价格统计，了解价格走势</p>
+                    <p class="text-muted mb-0">分析主要城市的所有成交房源月份、价格、户型、面积</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fas fa-4x fa-balance-scale  text-primary mb-3 sr-icon-2"></i>
-                    <h3 class="mb-3">在售房源信息</h3>
-                    <p class="text-muted mb-0">获取北上广深在售房源信息，了解房价波动情况</p>
+                    <h3 class="mb-3">在售房源分析</h3>
+                    <p class="text-muted mb-0">分析主要城市的所有在售房源区域、均价、户型、楼龄</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fas fa-4x fa-history text-primary mb-3 sr-icon-4"></i>
-                    <h3 class="mb-3">历史房源分析</h3>
-                    <p class="text-muted mb-0">获取北上广深所有成交房源信息统计,例如户型，月份统计等.</p>
+                    <h3 class="mb-3">城市均价分析</h3>
+                    <p class="text-muted mb-0">分析主要城市所有房源均价对比、分析主要城市均价最高区域对比</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
-                    <i class="fas fa-4x fa-flag text-primary mb-3 sr-icon-4"></i>
-                    <h3 class="mb-3">空气质量指数统计</h3>
-                    <p class="text-muted mb-0">获取2014年1月到2019年4月空气质量指数信息，了解空气污染变化情况</p>
+                    <i class="fas fa-4x fa-star text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">房产关注度分析</h3>
+                    <p class="text-muted mb-0">分析主要城市关注热度TOP100房型、房龄、面积和价格散点图</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
-                    <i class="fas fa-4x fa-warehouse text-primary mb-3 sr-icon-3"></i>
-                    <h3 class="mb-3">房产数据检索</h3>
-                    <p class="text-muted mb-0">提供北上广深自定义数据检索服务.</p>
+                    <i class="fas fa-4x fa-map-marked-alt text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">空气质量区域分布</h3>
+                    <p class="text-muted mb-0">结合百度地图，分析全国污染分布情况</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
-                    <i class="fas fa-4x fa-map text-primary mb-3 sr-icon-4"></i>
-                    <h3 class="mb-3">空气质量指数检索</h3>
-                    <p class="text-muted mb-0">提供空气质量指数自定义数据检索服务.</p>
+                    <i class="fas fa-4x fa-adjust text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">空气质量城市比较</h3>
+                    <p class="text-muted mb-0">提供基于两个城市的空气质量指数对比分析</p>
                 </div>
             </div>
-            <!--<div class="col-lg-4 col-md-6 text-center">-->
-                <!--<div class="service-box mt-5 mx-auto">-->
-                    <!--<i class="fas fa-4x fa-fire text-primary mb-3 sr-icon-4"></i>-->
-                    <!--<h3 class="mb-3">楼市新闻热点</h3>-->
-                    <!--<p class="text-muted mb-0">获取最新二手房市场新闻，了解楼市最新动态.</p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-lg-4 col-md-6 text-center">-->
-                <!--<div class="service-box mt-5 mx-auto">-->
-                    <!--<i class="fas fa-4x fa-gem text-primary mb-3 sr-icon-4"></i>-->
-                    <!--<h3 class="mb-3">历史房源分析</h3>-->
-                    <!--<p class="text-muted mb-0">获取某个小区内的所有成交房源信息统计,例如户型，装修等.</p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-lg-4 col-md-6 text-center">-->
-                <!--<div class="service-box mt-5 mx-auto">-->
-                    <!--<i class="fas fa-4x fa-paper-plane text-primary mb-3 sr-icon-4"></i>-->
-                    <!--<h3 class="mb-3">小区周边信息</h3>-->
-                    <!--<p class="text-muted mb-0">获取小区物业信息以及周边设施，例如学校，交通.</p>-->
-                <!--</div>-->
-            <!--</div>-->
+
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-layer-group fa-4x text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">空气质量城市群分析</h3>
+                    <p class="text-muted mb-0">分析京津冀、长三角、珠三角城市群优良天数、PM2.5、PM10变化趋势</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-bell fa-4x text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">空气质量重点污染物分析</h3>
+                    <p class="text-muted mb-0">分析各城市重点污染物月均指数月份变化情况</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-paperclip fa-4x text-primary mb-3 sr-icon-4"></i>
+                    <h3 class="mb-3">经济人口关联分析</h3>
+                    <p class="text-muted mb-0">分析城市房价与GDP、人口的关联情况</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -147,7 +152,8 @@
         <!--<li class="mb-5">本站成交房源数据包含成交日期和真实价格，可以真实反应某段时间内的二手房价格趋势。</li>-->
         <li class="mb-5 ">本站二手房数据来自于<a href="https://lianjia.com/" target="_blank">链家网</a>官方发布。</li>
         <li class="mb-5">所有二手房成交都需要进行网签，所以网签数据具有真实性、权威性特征。</li>
-        <li class="mb-5">本站空气质量数据来自于<a href="https://www.aqistudy.cn/historydata/" target="_blank">中国空气质量在线监测分析平台</a>官方发布。</li>
+        <li class="mb-5">本站空气质量数据来自于<a href="https://www.aqistudy.cn/historydata/" target="_blank">中国空气质量在线监测分析平台</a>官方发布。
+        </li>
         <li class="mb-5">中国空气质量在线监测分析平台是公益性质的软件平台，目前收录了367个城市的PM2.5及天气信息数据。</li>
         <li class="mb-5">本网站数据仅供参考，如有任何问题，请依官方网站公布为准。</li>
         <li class="mb-5">本网站仅供学习与交流，不用于商业用途。</li>
@@ -157,7 +163,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <p class="mb-5 text-muted"><a href="https://github.com/P9J7/elk-city" target="_blank">基于Elastic Stack的城市大数据分析系统</a> | Copyright &copy; 2019 P9J7</p>
+                <p class="mb-5 text-muted"><a href="https://github.com/P9J7/elk-city" target="_blank">基于Elastic
+                    Stack的城市大数据分析系统</a> | Copyright &copy; 2019 P9J7</p>
             </div>
         </div>
     </div>

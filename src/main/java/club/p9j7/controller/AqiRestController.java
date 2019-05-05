@@ -1,12 +1,16 @@
 package club.p9j7.controller;
 
 import club.p9j7.model.Aqi;
+import club.p9j7.model.AqiAggResult;
 import club.p9j7.model.AqiResultContent;
 import club.p9j7.service.AqiElk;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.BucketOrder;
+import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
+import org.elasticsearch.search.aggregations.bucket.histogram.InternalDateHistogram;
+import org.elasticsearch.search.aggregations.bucket.terms.InternalTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.aggregations.metrics.avg.InternalAvg;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -19,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -206,5 +212,173 @@ public class AqiRestController {
         map.put("aqiData", aqiContents);
         map.put("timeData", dateContents);
         return map;
+    }
+
+    @RequestMapping("/getPmAver")
+    public List<AqiAggResult> getPmAver() {
+        List<AqiAggResult> results = Collections.synchronizedList(new ArrayList<>());
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.rangeQuery("time_point").from("2014-01-01").to("2019-01-01"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_month").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.MONTH)
+                        .subAggregation(AggregationBuilders.avg("avgPm2_5").field("pm2_5"))
+                        .subAggregation(AggregationBuilders.avg("avgPm10").field("pm10")))
+                .build();
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        InternalDateHistogram groupByYear = (InternalDateHistogram) aggregations.getAsMap().get("group_by_month");
+        List<InternalDateHistogram.Bucket> buckets = groupByYear.getBuckets();
+        List<Double> pm2_5List = new ArrayList<>();
+        List<Double> pm10List = new ArrayList<>();
+        buckets.forEach(item -> {
+                InternalAvg pm2_5 = (InternalAvg) item.getAggregations().getAsMap().get("avgPm2_5");
+                InternalAvg pm10 = (InternalAvg) item.getAggregations().getAsMap().get("avgPm10");
+                pm2_5List.add(new BigDecimal(pm2_5.getValue()).setScale(2, RoundingMode.DOWN).doubleValue());
+                pm10List.add(new BigDecimal(pm10.getValue()).setScale(2, RoundingMode.DOWN).doubleValue());
+        });
+        AqiAggResult pm2_5Result = new AqiAggResult("PM2.5", "line", pm2_5List);
+        AqiAggResult pm10Result = new AqiAggResult("PM10", "line", pm10List);
+        results.add(pm2_5Result);
+        results.add(pm10Result);
+        return results;
+    }
+
+    @RequestMapping("/getAqiAgg")
+    public List<AqiAggResult> getAqiAgg() {
+        List<AqiAggResult> results = Collections.synchronizedList(new ArrayList<>());
+        SearchQuery jjj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "北京", "天津", "保定", "唐山", "廊坊", "石家庄", "邯郸",
+                        "秦皇岛", "张家口", "承德", "沧州", "邢台", "衡水"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.terms("group_by_quality").field("quality")))
+                .build();
+        SearchQuery csj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "上海", "南京", "无锡", "常州", "苏州", "南通", "盐城",
+                        "扬州", "镇江", "泰州", "杭州", "宁波", "嘉兴", "湖州", "绍兴", "金华", "舟山", "台州", "合肥", "芜湖", "马鞍山",
+                        "铜陵", "安庆", "滁州", "池州", "宣城"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.terms("group_by_quality").field("quality")))
+                .build();
+        SearchQuery zsj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "广州", "佛山", "肇庆", "清远", "云浮", "韶关", "深圳",
+                        "东莞", "惠州", "汕尾", "河源", "珠海", "中山", "江门", "阳江"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.terms("group_by_quality").field("quality")))
+                .build();
+        results.add(aqiAggGet(jjj, "京津冀"));
+        results.add(aqiAggGet(csj, "长三角"));
+        results.add(aqiAggGet(zsj, "珠三角"));
+        return results;
+    }
+
+    @RequestMapping("/getPm2_5Agg")
+    public List<AqiAggResult> getPm2_5Agg() {
+        List<AqiAggResult> results = Collections.synchronizedList(new ArrayList<>());
+        SearchQuery jjj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "北京", "天津", "保定", "唐山", "廊坊", "石家庄", "邯郸",
+                        "秦皇岛", "张家口", "承德", "沧州", "邢台", "衡水"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.avg("avg_pm2_5").field("pm2_5")))
+                .build();
+        SearchQuery csj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "上海", "南京", "无锡", "常州", "苏州", "南通", "盐城",
+                        "扬州", "镇江", "泰州", "杭州", "宁波", "嘉兴", "湖州", "绍兴", "金华", "舟山", "台州", "合肥", "芜湖", "马鞍山",
+                        "铜陵", "安庆", "滁州", "池州", "宣城"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.avg("avg_pm2_5").field("pm2_5")))
+                .build();
+        SearchQuery zsj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "广州", "佛山", "肇庆", "清远", "云浮", "韶关", "深圳",
+                        "东莞", "惠州", "汕尾", "河源", "珠海", "中山", "江门", "阳江"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.avg("avg_pm2_5").field("pm2_5")))
+                .build();
+        results.add(pm2_5AggGet(jjj, "京津冀"));
+        results.add(pm2_5AggGet(csj, "长三角"));
+        results.add(pm2_5AggGet(zsj, "珠三角"));
+        return results;
+    }
+
+    @RequestMapping("/getPm10Agg")
+    public List<AqiAggResult> getPm10Agg() {
+        List<AqiAggResult> results = Collections.synchronizedList(new ArrayList<>());
+        SearchQuery jjj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "北京", "天津", "保定", "唐山", "廊坊", "石家庄", "邯郸",
+                        "秦皇岛", "张家口", "承德", "沧州", "邢台", "衡水"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.avg("avg_pm10").field("pm10")))
+                .build();
+        SearchQuery csj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "上海", "南京", "无锡", "常州", "苏州", "南通", "盐城",
+                        "扬州", "镇江", "泰州", "杭州", "宁波", "嘉兴", "湖州", "绍兴", "金华", "舟山", "台州", "合肥", "芜湖", "马鞍山",
+                        "铜陵", "安庆", "滁州", "池州", "宣城"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.avg("avg_pm10").field("pm10")))
+                .build();
+        SearchQuery zsj = new NativeSearchQueryBuilder().withQuery(
+                QueryBuilders.termsQuery("city", "广州", "佛山", "肇庆", "清远", "云浮", "韶关", "深圳",
+                        "东莞", "惠州", "汕尾", "河源", "珠海", "中山", "江门", "阳江"))
+                .addAggregation(AggregationBuilders.dateHistogram("group_by_year").field("time_point")
+                        .dateHistogramInterval(DateHistogramInterval.YEAR)
+                        .subAggregation(AggregationBuilders.avg("avg_pm10").field("pm10")))
+                .build();
+        results.add(pm10AggGet(jjj, "京津冀"));
+        results.add(pm10AggGet(csj, "长三角"));
+        results.add(pm10AggGet(zsj, "珠三角"));
+        return results;
+    }
+
+    public AqiAggResult aqiAggGet(SearchQuery searchQuery, String name) {
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        InternalDateHistogram groupByYear = (InternalDateHistogram) aggregations.getAsMap().get("group_by_year");
+        List<InternalDateHistogram.Bucket> buckets = groupByYear.getBuckets();
+        List<Double> list = new ArrayList<>();
+        buckets.forEach(item -> {
+            if (!item.getKeyAsString().equals("2013-01-01T00:00:00.000Z")) {
+                StringTerms stringTerms = (StringTerms) item.getAggregations().getAsMap().get("group_by_quality");
+                List<StringTerms.Bucket> buckets1 = stringTerms.getBuckets();
+                long count = buckets1.stream().filter(quality -> (quality.getKeyAsString().equals("良") || quality.getKeyAsString().equals("优"))).mapToLong(InternalTerms.Bucket::getDocCount).sum();
+                list.add(new BigDecimal(count * 1.0 / item.getDocCount() * 100).setScale(2, RoundingMode.DOWN).doubleValue());
+            }
+        });
+        AqiAggResult aqiAggResult = new AqiAggResult(name, "line", list);
+        return aqiAggResult;
+    }
+
+    public AqiAggResult pm2_5AggGet(SearchQuery searchQuery, String name) {
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        InternalDateHistogram groupByYear = (InternalDateHistogram) aggregations.getAsMap().get("group_by_year");
+        List<InternalDateHistogram.Bucket> buckets = groupByYear.getBuckets();
+        List<Double> list = new ArrayList<>();
+        buckets.forEach(item -> {
+            if (!item.getKeyAsString().equals("2013-01-01T00:00:00.000Z")) {
+                InternalAvg internalAvg = (InternalAvg) item.getAggregations().getAsMap().get("avg_pm2_5");
+                list.add(new BigDecimal(internalAvg.getValue()).setScale(2, RoundingMode.DOWN).doubleValue());
+            }
+        });
+        AqiAggResult aqiAggResult = new AqiAggResult(name, "line", list);
+        return aqiAggResult;
+    }
+
+    public AqiAggResult pm10AggGet(SearchQuery searchQuery, String name) {
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        InternalDateHistogram groupByYear = (InternalDateHistogram) aggregations.getAsMap().get("group_by_year");
+        List<InternalDateHistogram.Bucket> buckets = groupByYear.getBuckets();
+        List<Double> list = new ArrayList<>();
+        buckets.forEach(item -> {
+            if (!item.getKeyAsString().equals("2013-01-01T00:00:00.000Z")) {
+                InternalAvg internalAvg = (InternalAvg) item.getAggregations().getAsMap().get("avg_pm10");
+                list.add(new BigDecimal(internalAvg.getValue()).setScale(2, RoundingMode.DOWN).doubleValue());
+            }
+        });
+        AqiAggResult aqiAggResult = new AqiAggResult(name, "line", list);
+        return aqiAggResult;
     }
 }

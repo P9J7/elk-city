@@ -267,4 +267,32 @@ public class HouseRestController {
         });
         return results;
     }
+
+    @GetMapping("/getHouseCompare")
+    public List<List<String>> getHouseCompare() {
+        List<List<String>> results = new ArrayList<>();
+        List th = Arrays.asList("product", "1室1厅", "2室1厅", "2室2厅", "3室1厅", "3室2厅", "4室2厅");
+        results.add(th);
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery("status", 1))
+                .addAggregation(AggregationBuilders.terms("city").field("cityName").size(50)
+                .subAggregation(AggregationBuilders.terms("room_type").field("roomMainInfo").size(50)
+                        .subAggregation(AggregationBuilders.avg("avg_type").field("unitprice")).order(BucketOrder.aggregation("avg_type", false))))
+                        .build();
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
+        List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        buckets.forEach(item -> {
+            List<String> list = Arrays.asList(SpiderMan.mapCity.get(item.getKeyAsString()), "1室1厅", "2室1厅", "2室2厅", "3室1厅", "3室2厅", "4室2厅");
+            StringTerms stringTerms1 = (StringTerms) item.getAggregations().getAsMap().get("room_type");
+            List<StringTerms.Bucket> buckets1 = stringTerms1.getBuckets();
+            buckets1.forEach(roomtype -> {
+                if (list.contains(roomtype.getKeyAsString())) {
+                    InternalAvg internalAvg = (InternalAvg) roomtype.getAggregations().getAsMap().get("avg_type");
+                    list.set(list.indexOf(roomtype.getKeyAsString()),internalAvg.getValueAsString());
+                }
+            });
+            results.add(list);
+        });
+        return results;
+    }
 }

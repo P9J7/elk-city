@@ -9,7 +9,7 @@
     <meta name="description" content="基于Elastic Stack的城市大数据分析系统">
     <meta name="author" content="p9j7">
 
-    <title>关注度分析</title>
+    <title>城市群分析</title>
 
     <!-- Custom fonts for this templates-->
     <link th:href="@{/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -34,74 +34,40 @@
 
         <div class="container-fluid">
             <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-                <h1 class="h3 mb-0 text-gray-800"><a class="text-success ml-6">关注度分析</a></h1>
+                <h1 class="h3 mb-0 text-gray-800"><a class="text-info ml-6">城市群分析</a></h1>
             </div>
             <div class="row">
+                <!--<div class="col-xl-6 col-lg-6">-->
+                    <!--<div class="card shadow mb-4">-->
+                        <!--&lt;!&ndash; Card Header - Dropdown &ndash;&gt;-->
+                        <!--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">-->
+                            <!--<h6 class="m-0 font-weight-bold text-primary">京津冀</h6>-->
+                        <!--</div>-->
+                        <!--<div class="card-body">-->
+                            <!--<div id="main1" style="width: 600px;height:400px;"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-xl-6 col-lg-6">-->
+                    <!--<div class="card shadow mb-4">-->
+                        <!--&lt;!&ndash; Card Header - Dropdown &ndash;&gt;-->
+                        <!--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">-->
+                            <!--<h6 class="m-0 font-weight-bold text-primary">长三角</h6>-->
+                        <!--</div>-->
+                        <!--<div class="card-body">-->
+                            <!--<div id="main2" style="width: 600px;height:400px;"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="col-xl-12 col-lg-12">
                     <div class="card shadow mb-4">
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">关注度TOP100</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">全年优良天数比例变化</h6>
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <!--<div class="table-responsive">-->
-                            <table class="table table-hover table-striped table-bordered" id="dataTable" width="100%"
-                                   cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>排名</th>
-                                    <th>关注度</th>
-                                    <th>城市</th>
-                                    <th>区域</th>
-                                    <th>小区名称</th>
-                                    <th>建筑年代</th>
-                                    <th>房型</th>
-                                    <th>面积</th>
-                                    <th>总价</th>
-                                    <th>单价</th>
-                                    <!--<th>url</th>-->
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>排名</th>
-                                    <th>关注度</th>
-                                    <th>城市</th>
-                                    <th>区域</th>
-                                    <th>小区名称</th>
-                                    <th>建筑年代</th>
-                                    <th>房型</th>
-                                    <th>面积</th>
-                                    <th>总价</th>
-                                    <th>单价</th>
-                                    <!--<th>url</th>-->
-                                </tr>
-                                </tfoot>
-                            </table>
-                            <!--</div>-->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">关注度TOP100房型分析</h6>
-                        </div>
-                        <div class="card-body">
-                            <div id="main1" style="width: 600px;height:400px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">关注度TOP100房龄分析</h6>
-                        </div>
-                        <div class="card-body">
-                            <div id="main2" style="width: 600px;height:400px;"></div>
+                            <div id="main" style="width: 1200px;height:400px;"></div>
                         </div>
                     </div>
                 </div>
@@ -109,11 +75,23 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">关注度TOP100面积和总价分析</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">全年PM2.5平均指数变化</h6>
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <div id="main3" style="width: 1200px;height:400px;"></div>
+                            <div id="main1" style="width: 1200px;height:400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">全年PM10平均指数变化</h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div id="main2" style="width: 1200px;height:400px;"></div>
                         </div>
                     </div>
                 </div>
@@ -154,7 +132,7 @@
 <!-- Page level custom scripts -->
 <script th:src="@{/js/jquery.dataTables.js}"></script>
 <script th:src="@{/js/dataTables.bootstrap4.js}"></script>
-<script th:src="@{/js/houseFavCount.js}"></script>
+<script th:src="@{/js/aqiAgg.js}"></script>
 <!--<script th:src="@{/js/datatables-demo.js}"></script>-->
 </body>
 

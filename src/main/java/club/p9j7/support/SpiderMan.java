@@ -133,9 +133,6 @@ public class SpiderMan {
             cityMonthRealMap.put(city, monthRealList);
         }
         Spider airSpider = Spider.create(aqiSpider).addPipeline(aqiSpider.aqiPipeline).thread(5);
-        /**
-         * map 和 list 的 foreach 函数式编程
-         */
         cityMonthRealMap.forEach((key, value) -> {
             value.forEach((monthReal) -> {
                 Request request = new Request("https://www.aqistudy.cn/historydata/api/historyapi.php");

@@ -84,4 +84,14 @@ public class IndexController {
     public String aqiObserve() {
         return "aqiObserve";
     }
+
+    @RequestMapping("/aqi/agg")
+    public String aqiAgg() {
+        return "aqiAgg";
+    }
+
+    @RequestMapping("/aqi/important")
+    public String aqiImportant() {
+        return "aqiImportant";
+    }
 }

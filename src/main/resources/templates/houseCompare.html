@@ -9,7 +9,7 @@
     <meta name="description" content="基于Elastic Stack的城市大数据分析系统">
     <meta name="author" content="p9j7">
 
-    <title>City-ElasticSearch</title>
+    <title>房价对比分析</title>
 
     <!-- Custom fonts for this templates-->
     <link th:href="@{/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -37,43 +37,103 @@
                 <h1 class="h3 mb-0 text-gray-800"><a class="text-success ml-6">房价对比分析</a></h1>
             </div>
             <div class="row">
-                <!--<div class="col-lg-6 mb-4">-->
-                <!--<div class="form-inline">-->
-                <!--<div class="form-group">-->
-                <!--<select class="form-control text-primary" id="year" name="year">-->
-                <!--<option>2014</option>-->
-                <!--<option>2015</option>-->
-                <!--<option>2016</option>-->
-                <!--<option>2017</option>-->
-                <!--<option>2018</option>-->
-                <!--<option>2019</option>-->
-                <!--</select>-->
-                <!--<label for="year">年</label>-->
+                <!--<div class="col-lg-12 mb-4">-->
+                    <!--<div class="form-inline">-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="cityName1">选择城市</label>-->
+                            <!--<select class="form-control text-primary" id="cityName1" name="cityName1">-->
+                                <!--<option selected="selected">北京</option>-->
+                                <!--<option>上海</option>-->
+                                <!--<option>广州</option>-->
+                                <!--<option>深圳</option>-->
+                                <!--<option>重庆</option>-->
+                                <!--<option>天津</option>-->
+                                <!--<option>杭州</option>-->
+                                <!--<option>南京</option>-->
+                                <!--<option>西安</option>-->
+                                <!--<option>成都</option>-->
+                                <!--<option>石家庄</option>-->
+                                <!--<option>郑州</option>-->
+                                <!--<option>厦门</option>-->
+                                <!--<option>武汉</option>-->
+                                <!--<option>宁波</option>-->
+                                <!--<option>沈阳</option>-->
+                                <!--<option>太原</option>-->
+                                <!--<option>哈尔滨</option>-->
+                                <!--<option>青岛</option>-->
+                                <!--<option>大连</option>-->
+                                <!--<option>长春</option>-->
+                                <!--<option>海口</option>-->
+                                <!--<option>合肥</option>-->
+                                <!--<option>福州</option>-->
+                                <!--<option>南昌</option>-->
+                                <!--<option>济南</option>-->
+                                <!--<option>长沙</option>-->
+                                <!--<option>南宁</option>-->
+                                <!--<option>兰州</option>-->
+                                <!--<option>贵阳</option>-->
+                                <!--<option>昆明</option>-->
+                                <!--<option>拉萨</option>-->
+                                <!--<option>西宁</option>-->
+                                <!--<option>银川</option>-->
+                                <!--<option>呼和浩特</option>-->
+                                <!--<option>乌鲁木齐</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="cityName2">选择城市</label>-->
+                            <!--<select class="form-control text-primary" id="cityName2" name="cityName2">-->
+                                <!--<option>北京</option>-->
+                                <!--<option>上海</option>-->
+                                <!--<option selected="selected">广州</option>-->
+                                <!--<option>深圳</option>-->
+                                <!--<option>重庆</option>-->
+                                <!--<option>天津</option>-->
+                                <!--<option>杭州</option>-->
+                                <!--<option>南京</option>-->
+                                <!--<option>西安</option>-->
+                                <!--<option>成都</option>-->
+                                <!--<option>石家庄</option>-->
+                                <!--<option>郑州</option>-->
+                                <!--<option>厦门</option>-->
+                                <!--<option>武汉</option>-->
+                                <!--<option>宁波</option>-->
+                                <!--<option>沈阳</option>-->
+                                <!--<option>太原</option>-->
+                                <!--<option>哈尔滨</option>-->
+                                <!--<option>青岛</option>-->
+                                <!--<option>大连</option>-->
+                                <!--<option>长春</option>-->
+                                <!--<option>海口</option>-->
+                                <!--<option>合肥</option>-->
+                                <!--<option>福州</option>-->
+                                <!--<option>南昌</option>-->
+                                <!--<option>济南</option>-->
+                                <!--<option>长沙</option>-->
+                                <!--<option>南宁</option>-->
+                                <!--<option>兰州</option>-->
+                                <!--<option>贵阳</option>-->
+                                <!--<option>昆明</option>-->
+                                <!--<option>拉萨</option>-->
+                                <!--<option>西宁</option>-->
+                                <!--<option>银川</option>-->
+                                <!--<option>呼和浩特</option>-->
+                                <!--<option>乌鲁木齐</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <!--<button type="submit" class="btn btn-primary" id="search">分析</button>-->
+                    <!--</div>-->
                 <!--</div>-->
-                <!--<div class="form-group">-->
-                <!--<select class="form-control text-primary" id="month" name="month">-->
-                <!--<option>1</option>-->
-                <!--<option>2</option>-->
-                <!--<option>3</option>-->
-                <!--<option>4</option>-->
-                <!--<option>5</option>-->
-                <!--<option>6</option>-->
-                <!--<option>7</option>-->
-                <!--<option>8</option>-->
-                <!--<option>9</option>-->
-                <!--<option>10</option>-->
-                <!--<option>11</option>-->
-                <!--<option>12</option>-->
-                <!--</select>-->
-                <!--</div>-->
-                <!--<label for="month">月</label>-->
-                <!--<button type="submit" class="btn btn-primary" id="search">搜索</button>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-lg-6">-->
-                <!--</div>-->
-                <div class="card-body">
-                    <canvas id="myAreaChart"></canvas>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">各户型均价对比分析</h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="main" style="width: 1200px;height:800px;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,7 +166,7 @@
 
 
 <!-- Page level plugins -->
-<script type="text/javascript" th:src="@{/js/Chart.js}"></script>
+<script type="text/javascript" th:src="@{/js/echart.js}"></script>
 
 <!-- Page level custom scripts -->
 <script th:src="@{/js/jquery.dataTables.js}"></script>
