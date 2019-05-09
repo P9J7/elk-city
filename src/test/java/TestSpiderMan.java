@@ -48,7 +48,7 @@ public class TestSpiderMan {
     //宁波没爬完
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("sy");
+        spiderMan.crawlHouse("fz");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TestSpiderMan {
 
     @Test
     public void testHouseElk(){
-
+        houseElk.deleteAllByCityName("fz");
     }
 
     @Test

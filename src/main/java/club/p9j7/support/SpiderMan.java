@@ -47,24 +47,27 @@ public class SpiderMan {
         areaMap.put("xmArea", Arrays.asList("思明", "湖里", "海沧", "集美", "翔安", "同安"));
         areaMap.put("whArea", Arrays.asList("江岸", "江汉", "硚口", "东西湖", "武昌", "青山", "洪山", "汉阳", "东湖高新", "江夏", "蔡甸", "黄陂", "新洲", "沌口开发区"));
         areaMap.put("nbArea", Arrays.asList("海曙区", "江北区", "镇海区", "北仑区", "鄞州区", "余姚市", "慈溪市"));
+        //以下暂时未爬取
         areaMap.put("syArea", Arrays.asList("铁西", "和平", "沈河", "浑南", "大东", "皇姑", "于洪", "苏家屯", "沈北新区"));
-        mapArea.put("wh", Arrays.asList("jiangan", "jianghan", "qiaokou", "dongxihu", "wuchang", "qingshan", "hongshan", "hanyang", "donghugaoxin", "jiangxia", "caidian", "huangbei", "xinzhou", "zhuankoukaifaqu"));
-        mapArea.put("zz", Arrays.asList("jinshui", "zhongyuan", "zhengdongxinqu", "guanchenghuizuqu", "erqi", "huiji", "gaoxin9", "jingkaiqu", "xingyangshi", "zhongmuxian", "xinzhengshi"));
-        mapArea.put("sjz", Arrays.asList("yuhua1", "changan", "qiaoxi", "xinhua", "kaifaqu1", "zhengding", "luquan", "luancheng", "gaocheng"));
-        mapArea.put("cd", Arrays.asList("jinjiang", "qingyang", "wuhou", "gaoxin7", "chenghua", "jinniu", "tianfuxinqu", "shuangliu", "wenjiang", "pidou", "longquanyi", "xindou", "doujiangyan"));
-        mapArea.put("gz", Arrays.asList("tianhe", "yuexiu", "liwan", "haizhu", "panyu", "baiyun", "huangpugz", "conghua", "zengcheng", "huadou", "nansha"));
-        mapArea.put("bj", Arrays.asList("dongcheng", "xicheng", "chaoyang", "haidian", "fengtai", "shijingshan", "tongzhou", "changping", "daxing", "yizhuangkaifaqu", "shunyi", "fangshan", "mentougou"));
-        mapArea.put("sh", Arrays.asList("pudong", "minhang", "baoshan", "xuhui", "putuo", "yangpu", "changning", "songjiang", "jiading", "huangpu", "jingan", "zhabei", "hongkou", "qingpu", "fengxian"));
-        mapArea.put("sz", Arrays.asList("luohuqu", "futianqu", "nanshanqu", "yantianqu", "baoanqu", "longgangqu", "longhuaqu"));
-        mapArea.put("cq", Arrays.asList("jiangbei", "yubei", "nanan", "banan", "shapingba", "jiulongpo", "yuzhong", "jiangjing", "beibei"));
-        mapArea.put("hz", Arrays.asList("xihu", "xiacheng", "jianggan", "gongshu", "shangcheng", "binjiang", "yuhang", "xiaoshan", "qiantangxinqu"));
-        mapArea.put("tj", Arrays.asList("heping", "nankai", "hexi", "hebei", "hedong", "hongqiao", "xiqing", "beichen", "dongli", "jinnan", "tanggu", "wuqing", "binhaixinqu", "baodi"));
-        mapArea.put("cs", Arrays.asList("yuhua", "yuelu", "tianxin", "kaifu", "furong", "changshaxian"));
-        mapArea.put("nj", Arrays.asList("gulou", "jianye", "qinhuai", "xuanwu", "yuhuatai", "qixia", "jiangning", "pukou"));
-        mapArea.put("xa", Arrays.asList("beilin", "weiyang", "baqiao", "xinchengqu", "changan4", "lianhu", "yanta"));
-        mapArea.put("xm", Arrays.asList("siming", "huli", "haicang", "jimei", "xiangan", "tongan"));
-        mapArea.put("nb", Arrays.asList("haishuqu1", "jiangbeiqu1", "zhenhaiqu1", "beilunqu1", "yinzhouqu2", "yuyaoshi", "cixishi"));
-        mapArea.put("sy", Arrays.asList("tiexi", "heping1", "shenhe", "hunnan", "dadong", "huanggu", "yuhong", "sujiatun", "shenbeixinqu"));
+        areaMap.put("tyArea", Arrays.asList("杏花岭区", "迎泽区", "万柏林区", "小店区", "尖草坪区", "晋源区"));
+//        mapArea.put("wh", Arrays.asList("jiangan", "jianghan", "qiaokou", "dongxihu", "wuchang", "qingshan", "hongshan", "hanyang", "donghugaoxin", "jiangxia", "caidian", "huangbei", "xinzhou", "zhuankoukaifaqu"));
+//        mapArea.put("zz", Arrays.asList("jinshui", "zhongyuan", "zhengdongxinqu", "guanchenghuizuqu", "erqi", "huiji", "gaoxin9", "jingkaiqu", "xingyangshi", "zhongmuxian", "xinzhengshi"));
+//        mapArea.put("sjz", Arrays.asList("yuhua1", "changan", "qiaoxi", "xinhua", "kaifaqu1", "zhengding", "luquan", "luancheng", "gaocheng"));
+//        mapArea.put("cd", Arrays.asList("jinjiang", "qingyang", "wuhou", "gaoxin7", "chenghua", "jinniu", "tianfuxinqu", "shuangliu", "wenjiang", "pidou", "longquanyi", "xindou", "doujiangyan"));
+//        mapArea.put("gz", Arrays.asList("tianhe", "yuexiu", "liwan", "haizhu", "panyu", "baiyun", "huangpugz", "conghua", "zengcheng", "huadou", "nansha"));
+//        mapArea.put("bj", Arrays.asList("dongcheng", "xicheng", "chaoyang", "haidian", "fengtai", "shijingshan", "tongzhou", "changping", "daxing", "yizhuangkaifaqu", "shunyi", "fangshan", "mentougou"));
+//        mapArea.put("sh", Arrays.asList("pudong", "minhang", "baoshan", "xuhui", "putuo", "yangpu", "changning", "songjiang", "jiading", "huangpu", "jingan", "zhabei", "hongkou", "qingpu", "fengxian"));
+//        mapArea.put("sz", Arrays.asList("luohuqu", "futianqu", "nanshanqu", "yantianqu", "baoanqu", "longgangqu", "longhuaqu"));
+//        mapArea.put("cq", Arrays.asList("jiangbei", "yubei", "nanan", "banan", "shapingba", "jiulongpo", "yuzhong", "jiangjing", "beibei"));
+//        mapArea.put("hz", Arrays.asList("xihu", "xiacheng", "jianggan", "gongshu", "shangcheng", "binjiang", "yuhang", "xiaoshan", "qiantangxinqu"));
+//        mapArea.put("tj", Arrays.asList("heping", "nankai", "hexi", "hebei", "hedong", "hongqiao", "xiqing", "beichen", "dongli", "jinnan", "tanggu", "wuqing", "binhaixinqu", "baodi"));
+//        mapArea.put("cs", Arrays.asList("yuhua", "yuelu", "tianxin", "kaifu", "furong", "changshaxian"));
+//        mapArea.put("nj", Arrays.asList("gulou", "jianye", "qinhuai", "xuanwu", "yuhuatai", "qixia", "jiangning", "pukou"));
+//        mapArea.put("xa", Arrays.asList("beilin", "weiyang", "baqiao", "xinchengqu", "changan4", "lianhu", "yanta"));
+//        mapArea.put("xm", Arrays.asList("siming", "huli", "haicang", "jimei", "xiangan", "tongan"));
+//        mapArea.put("nb", Arrays.asList("haishuqu1", "jiangbeiqu1", "zhenhaiqu1", "beilunqu1", "yinzhouqu2", "yuyaoshi", "cixishi"));
+//        //以下暂时未爬取
+//        mapArea.put("sy", Arrays.asList("tiexi", "heping1", "shenhe", "hunnan", "dadong", "huanggu", "yuhong", "sujiatun", "shenbeixinqu"));
         cityMap.put("郑州", "zz");
         cityMap.put("武汉", "wh");
         cityMap.put("厦门", "xm");
@@ -113,11 +116,10 @@ public class SpiderMan {
     }
 
     public void crawlHouse(String city) {
+        //
         Spider houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
-        mapArea.get(city).forEach(item -> {
-            houseSpider.addUrl("https://" + city + ".lianjia.com/ershoufang/" + item + "/");
-            houseSpider.addUrl("https://" + city + ".lianjia.com/chengjiao/" + item + "/");
-        });
+        houseSpider.addUrl("https://" + city + ".lianjia.com/ershoufang/");
+        houseSpider.addUrl("https://" + city + ".lianjia.com/chengjiao/");
         houseSpider.run();
     }
 
