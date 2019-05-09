@@ -30,7 +30,7 @@ public class LianjiaSpider implements PageProcessor {
     //成交首页
     private static final String urlDealBase = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d?/$";
     //正则匹配翻页链接   https://gz.lianjia.com/ershoufang/tianhe/pg2
-    private  static final String urlIndex = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/[a-z]+\\d?/pg\\d+/";
+    private static final String urlIndex = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/[a-z]+\\d?/pg\\d+/";
     //成交翻页
     private  static final String urlDealIndex = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d?/pg\\d+/";
 
@@ -38,12 +38,14 @@ public class LianjiaSpider implements PageProcessor {
     private static Logger logger = LoggerFactory.getLogger(LianjiaSpider.class);
     @Override
     public void process(Page page) {
-        if (page.getUrl().regex(urlBase).match() || page.getUrl().regex(urlDealBase).match()) {
-            List<String> pgList = new ArrayList<>();
-            for (int i = 2; i < 101; i++) {
-                pgList.add(page.getUrl().toString() + "pg" + i + "/");
-            }
-            page.addTargetRequests(pgList);
+        if (page.getUrl().regex(urlBase).match()) {
+            int saleHouseCount = Integer.parseInt(page.getHtml().xpath("//div[@class=resultDes]/h2[@class=total]/span/text(0)").toString().trim());
+            houseCount(page, saleHouseCount);
+        }
+
+        if (page.getUrl().regex(urlDealBase).match()) {
+            int dealHouseCount = Integer.parseInt(page.getHtml().xpath("//div[@class=resultDes]/div[@class=total]/span/text(0)").toString().trim());
+            houseCount(page, dealHouseCount);
         }
 
         if (page.getUrl().regex(urlIndex).match() || page.getUrl().regex(urlDealIndex).match()) {
@@ -93,6 +95,20 @@ public class LianjiaSpider implements PageProcessor {
                 house.setStatus(2);
             }
             page.putField("house",house);
+        }
+    }
+
+    private void houseCount(Page page, int dealHouseCount) {
+        if (dealHouseCount < 3000) {
+            List<String> pgList = new ArrayList<>();
+            for (int i = 1; i < 101; i++) {
+                pgList.add(page.getUrl().toString() + "pg" + i + "/");
+            }
+            page.addTargetRequests(pgList);
+        }
+        else {
+            List<String> subAreaList = page.getHtml().xpath("//div[@data-role=ershoufang]/div[2]/a/@href").all();
+            page.addTargetRequests(subAreaList);
         }
     }
 

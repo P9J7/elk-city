@@ -45,9 +45,10 @@ public class TestSpiderMan {
             spiderMan.crwalAqi();
     }
 
+    //宁波没爬完
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("xa");
+        spiderMan.crawlHouse("sy");
     }
 
     @Test

@@ -88,9 +88,9 @@ public class HouseRestController {
         List<HouseResultContent> houseResultContents = new ArrayList<>();
         //只关注最近半年
         Map<String, List<String>> yearMonths = new LinkedHashMap<>();
-        List<String> months = Arrays.asList("07", "08", "09", "10", "11", "12", "01", "02", "03");
+        List<String> months = Arrays.asList("07", "08", "09", "10", "11", "12", "01", "02", "03","04","05");
         yearMonths.put("2018", months.subList(0, 6));
-        yearMonths.put("2019", months.subList(6, 9));
+        yearMonths.put("2019", months.subList(6, 11));
         yearMonths.forEach((year, month) -> {
             month.forEach((monthItem) -> {
                 Integer count = houseElk.countByCityNameAndDealYearAndDealMonth(SpiderMan.cityMap.get(cityName), year, monthItem);

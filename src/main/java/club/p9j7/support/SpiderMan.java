@@ -41,6 +41,17 @@ public class SpiderMan {
         areaMap.put("csArea", Arrays.asList("雨花", "岳麓", "天心", "开福", "芙蓉", "长沙县"));
         areaMap.put("njArea", Arrays.asList("鼓楼", "建邺", "秦淮", "玄武", "雨花台", "栖霞","江宁","浦口"));
         areaMap.put("xaArea", Arrays.asList("碑林", "未央", "灞桥", "新城区", "长安", "莲湖","雁塔"));
+        areaMap.put("cdArea", Arrays.asList("锦江", "青羊", "武侯", "高新", "成华", "金牛","天府新区", "双流", "温江", "郫都", "龙泉驿", "新都", "都江堰"));
+        areaMap.put("sjzArea", Arrays.asList("裕华", "长安", "桥西", "新华", "开发区", "正定","鹿泉", "栾城", "藁城"));
+        areaMap.put("zzArea", Arrays.asList("金水", "中原", "郑东新区", "管城回族区", "二七", "惠济","高新", "经开区", "荥阳市", "中牟县", "新郑市"));
+        areaMap.put("xmArea", Arrays.asList("思明", "湖里", "海沧", "集美", "翔安", "同安"));
+        areaMap.put("whArea", Arrays.asList("江岸", "江汉", "硚口", "东西湖", "武昌", "青山", "洪山", "汉阳", "东湖高新", "江夏", "蔡甸", "黄陂", "新洲", "沌口开发区"));
+        areaMap.put("nbArea", Arrays.asList("海曙区", "江北区", "镇海区", "北仑区", "鄞州区", "余姚市", "慈溪市"));
+        areaMap.put("syArea", Arrays.asList("铁西", "和平", "沈河", "浑南", "大东", "皇姑", "于洪", "苏家屯", "沈北新区"));
+        mapArea.put("wh", Arrays.asList("jiangan", "jianghan", "qiaokou", "dongxihu", "wuchang", "qingshan", "hongshan", "hanyang", "donghugaoxin", "jiangxia", "caidian", "huangbei", "xinzhou", "zhuankoukaifaqu"));
+        mapArea.put("zz", Arrays.asList("jinshui", "zhongyuan", "zhengdongxinqu", "guanchenghuizuqu", "erqi", "huiji", "gaoxin9", "jingkaiqu", "xingyangshi", "zhongmuxian", "xinzhengshi"));
+        mapArea.put("sjz", Arrays.asList("yuhua1", "changan", "qiaoxi", "xinhua", "kaifaqu1", "zhengding", "luquan", "luancheng", "gaocheng"));
+        mapArea.put("cd", Arrays.asList("jinjiang", "qingyang", "wuhou", "gaoxin7", "chenghua", "jinniu", "tianfuxinqu", "shuangliu", "wenjiang", "pidou", "longquanyi", "xindou", "doujiangyan"));
         mapArea.put("gz", Arrays.asList("tianhe", "yuexiu", "liwan", "haizhu", "panyu", "baiyun", "huangpugz", "conghua", "zengcheng", "huadou", "nansha"));
         mapArea.put("bj", Arrays.asList("dongcheng", "xicheng", "chaoyang", "haidian", "fengtai", "shijingshan", "tongzhou", "changping", "daxing", "yizhuangkaifaqu", "shunyi", "fangshan", "mentougou"));
         mapArea.put("sh", Arrays.asList("pudong", "minhang", "baoshan", "xuhui", "putuo", "yangpu", "changning", "songjiang", "jiading", "huangpu", "jingan", "zhabei", "hongkou", "qingpu", "fengxian"));
@@ -51,7 +62,15 @@ public class SpiderMan {
         mapArea.put("cs", Arrays.asList("yuhua", "yuelu", "tianxin", "kaifu", "furong", "changshaxian"));
         mapArea.put("nj", Arrays.asList("gulou", "jianye", "qinhuai", "xuanwu", "yuhuatai", "qixia", "jiangning", "pukou"));
         mapArea.put("xa", Arrays.asList("beilin", "weiyang", "baqiao", "xinchengqu", "changan4", "lianhu", "yanta"));
+        mapArea.put("xm", Arrays.asList("siming", "huli", "haicang", "jimei", "xiangan", "tongan"));
+        mapArea.put("nb", Arrays.asList("haishuqu1", "jiangbeiqu1", "zhenhaiqu1", "beilunqu1", "yinzhouqu2", "yuyaoshi", "cixishi"));
+        mapArea.put("sy", Arrays.asList("tiexi", "heping1", "shenhe", "hunnan", "dadong", "huanggu", "yuhong", "sujiatun", "shenbeixinqu"));
+        cityMap.put("郑州", "zz");
+        cityMap.put("武汉", "wh");
+        cityMap.put("厦门", "xm");
+        cityMap.put("石家庄", "sjz");
         cityMap.put("广州", "gz");
+        cityMap.put("成都", "cd");
         cityMap.put("北京", "bj");
         cityMap.put("上海", "sh");
         cityMap.put("深圳", "sz");
@@ -61,8 +80,11 @@ public class SpiderMan {
         cityMap.put("长沙", "cs");
         cityMap.put("南京", "nj");
         cityMap.put("西安", "xa");
+        cityMap.put("宁波", "nb");
+        cityMap.put("沈阳", "sy");
         mapCity.put("bj", "北京");
         mapCity.put("sh", "上海");
+        mapCity.put("cd", "成都");
         mapCity.put("gz", "广州");
         mapCity.put("sz", "深圳");
         mapCity.put("cq", "重庆");
@@ -71,6 +93,12 @@ public class SpiderMan {
         mapCity.put("cs", "长沙");
         mapCity.put("nj", "南京");
         mapCity.put("xa", "西安");
+        mapCity.put("sjz", "石家庄");
+        mapCity.put("zz", "郑州");
+        mapCity.put("xm", "厦门");
+        mapCity.put("wh", "武汉");
+        mapCity.put("nb", "宁波");
+        mapCity.put("sy", "沈阳");
     }
 
     private List<String> monthList = new ArrayList<>();
