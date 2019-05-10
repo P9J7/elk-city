@@ -72,13 +72,13 @@ public class LianjiaSpider implements PageProcessor {
     //正则匹配成交的某个房子
     private static final String urlDealDetail = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/\\d+\\.html";
     //正则匹配城市在售分区链接
-    private static final String urlBase = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/[a-z]+\\d?/$";
+    private static final String urlBase = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/[a-z]+\\d*/$";
     //正则匹配城市成交分区链接
-    private static final String urlDealBase = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d?/$";
+    private static final String urlDealBase = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d*/$";
     //正则匹配城市在售分页链接
-    private static final String urlIndex = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/[a-z]+\\d?/pg\\d+/";
+    private static final String urlIndex = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/[a-z]+\\d*/pg\\d+/";
     //正则匹配城市成交分页链接
-    private static final String urlDealIndex = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d?/pg\\d+/";
+    private static final String urlDealIndex = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d*/pg\\d+/";
 
     private Site site = Site.me().setCharset("UTF-8").setUserAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5").setRetryTimes(3).setSleepTime(100).setTimeOut(10000);
     private static Logger logger = LoggerFactory.getLogger(LianjiaSpider.class);

@@ -5,9 +5,11 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.model.HttpRequestBody;
+import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 import us.codecraft.webmagic.utils.HttpConstant;
 
+import javax.management.JMException;
 import javax.script.ScriptException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,11 @@ public class SpiderMan {
         Spider houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
         houseSpider.addUrl("https://" + city + ".lianjia.com/ershoufang/");
         houseSpider.addUrl("https://" + city + ".lianjia.com/chengjiao/");
+        try {
+            SpiderMonitor.instance().register(houseSpider);
+        } catch (JMException e) {
+            e.printStackTrace();
+        }
         houseSpider.run();
     }
 

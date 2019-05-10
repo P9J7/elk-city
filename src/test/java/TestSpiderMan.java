@@ -47,12 +47,12 @@ public class TestSpiderMan {
 
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("fz");
+        spiderMan.crawlHouse("gz");
     }
 
     @Test
     public void delete() {
-        houseElk.deleteAllByCityName("福州");
+//        houseElk.deleteAllByCityName("广州");
     }
 
     @Test
@@ -88,22 +88,6 @@ public class TestSpiderMan {
         List<Aqi> aqiList = elasticsearchTemplate.queryForList(searchQuery, Aqi.class);
 
         aqiList.forEach(System.out::println);
-
-//        RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("timePoint.year").gte(2019);
-//        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(rangeQueryBuilder).withFilter(QueryBuilders.rangeQuery("timePoint.month").gte(3))
-//                .addAggregation(AggregationBuilders.terms("group_by_city").field("city.keyword").size(369)).build();
-//        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
-//        StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("group_by_city");
-//        List<StringTerms.Bucket> cityBuckets = stringTerms.getBuckets();
-//        cityBuckets.forEach((city) -> System.out.println(city.getKeyAsString() + city.getDocCount()));
-        //todo 尚未解决管道问题
-//        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
-//                .addAggregation(AggregationBuilders.dateHistogram("aqig").field("timePoint.year")
-//                        .dateHistogramInterval(DateHistogramInterval.YEAR).subAggregation(AggregationBuilders.sum("sumg").field("aqi")
-//                )).build();
-//        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
-//        aggregations
-//        DoubleTerms doubleTerms = (DoubleTerms) aggregations.getAsMap().get("max_month_aqi_sum");
 
     }
 }
