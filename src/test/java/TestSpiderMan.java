@@ -45,12 +45,14 @@ public class TestSpiderMan {
             spiderMan.crwalAqi();
     }
 
-    //宁波没爬完
     @Test
     public void testHouse(){
         spiderMan.crawlHouse("fz");
     }
 
+    public void delete() {
+        houseElk.deleteAllByCityName("fz");
+    }
     @Test
     public void secondCrawl(){
         Spider houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
@@ -71,7 +73,7 @@ public class TestSpiderMan {
 
     @Test
     public void testHouseElk(){
-        houseElk.deleteAllByCityName("fz");
+
     }
 
     @Test
