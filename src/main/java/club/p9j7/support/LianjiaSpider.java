@@ -64,9 +64,9 @@ public class LianjiaSpider implements PageProcessor {
     }
 
     //正则匹配城市在售首页
-    public static final String urlCitySale = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/$";
+    private static final String urlCitySale = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/$";
     //正则匹配城市成交首页
-    public static final String urlCityDeal = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/$";
+    private static final String urlCityDeal = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/$";
     //正则匹配在售的某个房子
     private static final String urlDetail = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/\\d+\\.html";
     //正则匹配成交的某个房子
@@ -80,13 +80,13 @@ public class LianjiaSpider implements PageProcessor {
     //正则匹配城市成交分页链接
     private static final String urlDealIndex = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d?/pg\\d+/";
 
-    private Site site = Site.me().setUserAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5").setRetryTimes(3).setSleepTime(100).setTimeOut(10000);
+    private Site site = Site.me().setCharset("UTF-8").setUserAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5").setRetryTimes(3).setSleepTime(100).setTimeOut(10000);
     private static Logger logger = LoggerFactory.getLogger(LianjiaSpider.class);
 
     @Override
     public void process(Page page) {
         if (page.getUrl().regex(urlCitySale).match() || page.getUrl().regex(urlCityDeal).match()) {
-            logger.info("首页入口");
+//            logger.info("首页入口");
             String url = page.getUrl().toString();
             List<String> areaUrl = page.getHtml().xpath("//div[@data-role=ershoufang]/div/a/@href").all();
             for (int i = 0; i < areaUrl.size(); i++) {
@@ -106,12 +106,12 @@ public class LianjiaSpider implements PageProcessor {
         }
 
         if (page.getUrl().regex(urlIndex).match() || page.getUrl().regex(urlDealIndex).match()) {
-            logger.debug("爬取列表页");
+//            logger.debug("爬取列表页");
             page.addTargetRequests(page.getHtml().xpath("//div[@class=title]/a/@href").all());
         }
 
         if (page.getUrl().regex(urlDetail).match() || page.getUrl().regex(urlDealDetail).match()) {
-            logger.debug("爬取详情页");
+//            logger.debug("爬取详情页");
             Html pageHtml = page.getHtml();
             String url = page.getUrl().toString();
             House house = new House();

@@ -50,9 +50,11 @@ public class TestSpiderMan {
         spiderMan.crawlHouse("fz");
     }
 
+    @Test
     public void delete() {
-        houseElk.deleteAllByCityName("fz");
+        houseElk.deleteAllByCityName("福州");
     }
+
     @Test
     public void secondCrawl(){
         Spider houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
@@ -69,11 +71,6 @@ public class TestSpiderMan {
             cityList.add(houseResultContent);
         }
         System.out.println(cityList.toString());
-    }
-
-    @Test
-    public void testHouseElk(){
-
     }
 
     @Test
