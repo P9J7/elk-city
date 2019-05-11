@@ -47,6 +47,11 @@ public class SpiderMan {
             houseSpider.addUrl("https://" + k + ".lianjia.com/ershoufang/");
             houseSpider.addUrl("https://" + k + ".lianjia.com/chengjiao/");
         });
+        try {
+            SpiderMonitor.instance().register(houseSpider);
+        } catch (JMException e) {
+            e.printStackTrace();
+        }
         houseSpider.run();
     }
 

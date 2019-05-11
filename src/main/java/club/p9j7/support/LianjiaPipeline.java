@@ -29,9 +29,9 @@ public class LianjiaPipeline implements Pipeline {
         if (house != null) {
             houseList.add(house);
             synchronized (this) {
-                if (houseList.size() > 2000) {
-                    houseCount += 2000;
-                    logger.error("抓取 2000 条，总共抓取 {} 条", houseCount);
+                if (houseList.size() > 500) {
+                    houseCount += 500;
+                    logger.error("抓取 500 条，总共抓取 {} 条", houseCount);
                     houseElk.saveAll(houseList);
                     houseList.clear();
                 }

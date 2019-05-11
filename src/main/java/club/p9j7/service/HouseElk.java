@@ -13,4 +13,6 @@ public interface HouseElk extends ElasticsearchRepository<House, Long> {
     Integer countByCityNameAndAreaSubInfo(String cityName, String areaSubInfo);
 
     Integer deleteAllByCityName(String cityName);
+
+    Integer deleteAllByCityNameAndStatus(String cityName, Integer status);
 }

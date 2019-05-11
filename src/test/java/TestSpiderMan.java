@@ -53,6 +53,7 @@ public class TestSpiderMan {
     @Test
     public void delete() {
 //        houseElk.deleteAllByCityName("广州");
+        houseElk.deleteAllByCityNameAndStatus("广州", 2);
     }
 
     @Test

@@ -69,8 +69,8 @@ public class LianjiaSpider implements PageProcessor {
     private static final String urlCityDeal = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/$";
     //正则匹配在售的某个房子
     private static final String urlDetail = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/\\d+\\.html";
-    //正则匹配成交的某个房子
-    private static final String urlDealDetail = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/\\d+\\.html";
+    //正则匹配成交的某个房子，部分链接不规范含有字母前缀
+    private static final String urlDealDetail = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-zA-Z]*\\d+\\.html";
     //正则匹配城市在售分区链接
     private static final String urlBase = "https://[a-z]{2,}\\.lianjia\\.com/ershoufang/[a-z]+\\d*/$";
     //正则匹配城市成交分区链接
