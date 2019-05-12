@@ -1,8 +1,7 @@
 package club.p9j7.support;
 
-import club.p9j7.mapper.AqiMapper;
 import club.p9j7.model.Aqi;
-import club.p9j7.service.AqiElk;
+import club.p9j7.repository.AqiElk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
@@ -10,7 +9,6 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class AqiPipeline implements Pipeline {

@@ -51651,7 +51651,7 @@ var visualHandlers = VisualMapping.visualHandlers = {
         applyVisual: makeApplyVisual('color'),
 
         /**
-         * Create a mapper function
+         * Create a repository function
          * @return {Function}
          */
         getColorMapper: function () {
@@ -67316,13 +67316,13 @@ var AxisPointerModel = extendComponentModel({
 
         // [group0, group1, ...]
         // Each group can be: {
-        //      mapper: function () {},
+        //      repository: function () {},
         //      singleTooltip: 'multiple',  // 'multiple' or 'single'
         //      xAxisId: ...,
         //      yAxisName: ...,
         //      angleAxisIndex: ...
         // }
-        // mapper: can be ignored.
+        // repository: can be ignored.
         //      input: {axisInfo, value}
         //      output: {axisInfo, value}
         link: [],

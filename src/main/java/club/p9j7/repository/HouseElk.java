@@ -1,4 +1,4 @@
-package club.p9j7.service;
+package club.p9j7.repository;
 
 import club.p9j7.model.House;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;

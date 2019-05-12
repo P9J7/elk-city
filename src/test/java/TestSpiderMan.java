@@ -1,8 +1,8 @@
 import club.p9j7.Application;
 import club.p9j7.model.Aqi;
 import club.p9j7.model.HouseResultContent;
-import club.p9j7.service.AqiElk;
-import club.p9j7.service.HouseElk;
+import club.p9j7.repository.AqiElk;
+import club.p9j7.repository.HouseElk;
 import club.p9j7.support.LianjiaSpider;
 import club.p9j7.support.SpiderMan;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -47,7 +47,12 @@ public class TestSpiderMan {
 
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("gz");
+        spiderMan.crawlHouse("sz");
+    }
+
+    @Test
+    public void count() {
+        System.out.println(houseElk.countByCityName("石家庄"));
     }
 
     @Test

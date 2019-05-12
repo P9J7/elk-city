@@ -21,6 +21,6 @@ server:
   port: 8081
 logging:
   level:
-    club.p9j7: DEBUG
-    us.codecraft.webmagic: DEBUG
-    org.springframework.data.elasticsearch: DEBUG
+    club.p9j7: INFO
+    us.codecraft.webmagic: INFO
+    org.springframework.data.elasticsearch: INFO

@@ -1,7 +1,7 @@
 package club.p9j7.support;
 
 import club.p9j7.model.House;
-import club.p9j7.service.HouseElk;
+import club.p9j7.repository.HouseElk;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

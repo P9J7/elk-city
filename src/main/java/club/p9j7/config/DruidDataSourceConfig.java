@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-public class DuridDataSourceConfig {
+public class DruidDataSourceConfig {
     @Bean
     @ConfigurationProperties("spring.datasource.druid")
     public DataSource dataSourceOne(){

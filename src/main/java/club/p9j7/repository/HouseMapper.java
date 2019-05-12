@@ -1,4 +1,4 @@
-package club.p9j7.mapper;
+package club.p9j7.repository;
 
 import club.p9j7.model.House;
 import org.apache.ibatis.annotations.Insert;

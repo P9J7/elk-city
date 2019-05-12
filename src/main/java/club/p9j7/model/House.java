@@ -1,15 +1,11 @@
 package club.p9j7.model;
 
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Document(indexName = "lianjiaelk", type = "house")
 public class House implements Serializable {
@@ -26,7 +22,6 @@ public class House implements Serializable {
     @Field(type = FieldType.Keyword)
     private String cityName;
 
-//    private String code;
     //链家网址
     @Field(index = false, type = FieldType.Keyword)
     private String url;
@@ -34,9 +29,7 @@ public class House implements Serializable {
     @Field(index = false,type = FieldType.Keyword)
     private String title;
 
-//    private String subtitle;
     //关注人数
-
     @Field(type = FieldType.Integer)
     private Integer favcount = 0 ;
 
@@ -53,34 +46,27 @@ public class House implements Serializable {
     @Field(type = FieldType.Keyword)
     private String roomMainInfo;
 
-//    private String roomSubInfo;
-
-//    private String roomMainType;
-
-//    private String roomSubType;
-
     //平方面积
-
     @Field(type = FieldType.Double)
     private Double areaMainInfo;
 
     //建成年代
     @Field(type = FieldType.Keyword)
     private String areaSubInfo;
+
     //小区名称
     @Field(type = FieldType.Keyword)
     private String communityName;
+
     //所在区域
     @Field(type = FieldType.Keyword)
     private String areaName;
+
     /**
-     * 0:未处理；1:在售；2:已成交；-1:已经下架；-2：信息异常；-301：找不到
+     * 1:在售；2:已成交
      */
-
-
     @Field(type = FieldType.Integer)
     private Integer status;
-
 
     public String getDealYear() {
         return dealYear;
@@ -114,14 +100,6 @@ public class House implements Serializable {
         this.id = id;
     }
 
-//    public String getCode() {
-//        return code;
-//    }
-//
-//    public void setCode(String code) {
-//        this.code = code;
-//    }
-
     public String getUrl() {
         return url;
     }
@@ -137,14 +115,6 @@ public class House implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-
-//    public String getSubtitle() {
-//        return subtitle;
-//    }
-//
-//    public void setSubtitle(String subtitle) {
-//        this.subtitle = subtitle;
-//    }
 
     public Integer getFavcount() {
         return favcount;
@@ -177,31 +147,6 @@ public class House implements Serializable {
     public void setRoomMainInfo(String roomMainInfo) {
         this.roomMainInfo = roomMainInfo;
     }
-
-//    public String getRoomSubInfo() {
-//        return roomSubInfo;
-//    }
-//
-//    public void setRoomSubInfo(String roomSubInfo) {
-//        this.roomSubInfo = roomSubInfo;
-//    }
-//
-//    public String getRoomMainType() {
-//        return roomMainType;
-//    }
-//
-//    public void setRoomMainType(String roomMainType) {
-//        this.roomMainType = roomMainType;
-//    }
-//
-//    public String getRoomSubType() {
-//        return roomSubType;
-//    }
-//
-//    public void setRoomSubType(String roomSubType) {
-//        this.roomSubType = roomSubType;
-//    }
-
 
     public Double getAreaMainInfo() {
         return areaMainInfo;
