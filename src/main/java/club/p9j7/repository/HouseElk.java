@@ -6,6 +6,8 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 public interface HouseElk extends ElasticsearchRepository<House, Long> {
     Integer countByCityName(String cityName);
 
+    Integer countByCityNameAndStatus(String cityName, Integer status);
+
     Integer countByCityNameAndRoomMainInfoAndStatus(String cityName, String roomMainInfo, Integer status);
 
     Integer countByCityNameAndDealYearAndDealMonth(String cityName, String dealYear, String dealMonth);

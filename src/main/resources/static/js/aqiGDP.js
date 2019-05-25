@@ -68,12 +68,9 @@ var cityHouseMap = {
     '成都': [[13889, 1404]],
     '贵阳': [[3537, 432]],
     '昆明': [[4857, 643]],
-    '拉萨': [[479, 55]],
     '西安': [[7469, 1000]],
     '兰州': [[2523, 361]],
-    '西宁': [[1284, 220]],
-    '银川': [[1803, 199]],
-    '乌鲁木齐': [[2743, 311]]
+    '银川': [[1803, 199]]
 };
 
 var convertData1 = function (data, first) {
@@ -127,6 +124,11 @@ var itemStyle = {
 };
 
 option = {
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
     backgroundColor: '#404a59',
     color: [
         '#666666', '#00c5ff', '#808A87', '#808069', '#FAFFF0', '#E6E6E6', '#FAF0E6', '#FFFFCD', '#FCE6C9', '#FF0000',
@@ -486,20 +488,26 @@ $(document).ready(function () {
         url: '/getCityAverPrice',
         method: 'GET'
     }).done(function (res) {
+
         option1 = {
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
             backgroundColor: '#404a59',
             color: [
-                '#666666', '#00c5ff', '#808A87', '#808069', '#FAFFF0', '#E6E6E6', '#FAF0E6', '#FFFFCD', '#FCE6C9', '#FF0000',
-                '#FFFF00', '#bbff40', '#FF9912', '#9C661F', '#00ff6d', '#FF7F50', '#FFD700', '#FF6347', '#FF7D40', '#FFC0CB',
+                '#802A2A', '#00c5ff', '#40E0D0', '#FF9912', '#808A87', '#808069', '#FAFFF0', '#E6E6E6', '#FAF0E6', '#FFFFCD', '#FCE6C9', '#FF0000',
+                '#FFFF00', '#bbff40', '#9C661F', '#00ff6d', '#FF7F50', '#FFD700', '#FF6347', '#FF7D40', '#FFC0CB',
                 '#B0171F', '#ffb300', '#FF00FF', '#00FF00', '#608aff', '#C76114', '#7FFF00', '#228B22', '#6B8E23', '#03A89E',
-                '#DA70D6', '#9933FA', '#00C78C', '#082E54', '#40E0D0', '#802A2A'
+                '#DA70D6', '#9933FA', '#00C78C', '#082E54'
             ],
             legend: {
                 y: 'top',
                 data: ['北京', '上海', '广州', '深圳', '天津', '太原', '石家庄', '呼和浩特', '沈阳', '大连',
                     '长春', '哈尔滨', '南京', '杭州', '宁波', '合肥', '福州', '厦门', '南昌', '济南',
                     '青岛', '郑州', '武汉', '长沙', '南宁', '海口', '重庆', '成都', '贵阳', '昆明',
-                    '拉萨', '西安', '兰州', '西宁', '银川', '乌鲁木齐'],
+                    '西安', '兰州', '银川'],
                 textStyle: {
                     color: '#fff',
                     fontSize: 16
@@ -779,12 +787,6 @@ $(document).ready(function () {
                     data: cityHouseMap['昆明']
                 },
                 {
-                    name: '拉萨',
-                    type: 'scatter',
-                    itemStyle: itemStyle,
-                    data: cityHouseMap['拉萨']
-                },
-                {
                     name: '西安',
                     type: 'scatter',
                     itemStyle: itemStyle,
@@ -797,22 +799,10 @@ $(document).ready(function () {
                     data: cityHouseMap['兰州']
                 },
                 {
-                    name: '西宁',
-                    type: 'scatter',
-                    itemStyle: itemStyle,
-                    data: cityHouseMap['西宁']
-                },
-                {
                     name: '银川',
                     type: 'scatter',
                     itemStyle: itemStyle,
                     data: cityHouseMap['银川']
-                },
-                {
-                    name: '乌鲁木齐',
-                    type: 'scatter',
-                    itemStyle: itemStyle,
-                    data: cityHouseMap['乌鲁木齐']
                 }
             ]
         };

@@ -4,6 +4,7 @@ import club.p9j7.model.House;
 import club.p9j7.model.HouseResultContent;
 import club.p9j7.repository.HouseElk;
 import club.p9j7.support.LianjiaSpider;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -48,6 +50,7 @@ public class HouseService {
             HouseResultContent houseResultContent = new HouseResultContent(v, count);
             cityList.add(houseResultContent);
         });
+        cityList.sort(Comparator.comparingInt(a -> (int) a.getCount()));
         return cityList;
     }
 
@@ -60,7 +63,7 @@ public class HouseService {
                         .must(QueryBuilders.matchQuery("cityName", cityName))
                         .filter(QueryBuilders.matchQuery("status", 1)))
                 .addAggregation(AggregationBuilders.terms("group_by_area").field("areaName").size(50)).build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, SearchResponse::getAggregations);
         StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("group_by_area");
         List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
         buckets.forEach(item -> {
@@ -90,15 +93,13 @@ public class HouseService {
         List<HouseResultContent> houseResultContents = new ArrayList<>();
         //只关注最近半年
         Map<String, List<String>> yearMonths = new LinkedHashMap<>();
-        List<String> months = Arrays.asList("07", "08", "09", "10", "11", "12", "01", "02", "03", "04", "05");
+        List<String> months = Arrays.asList("07", "08", "09", "10", "11", "12", "01", "02", "03", "04");
         yearMonths.put("2018", months.subList(0, 6));
-        yearMonths.put("2019", months.subList(6, 11));
-        yearMonths.forEach((year, month) -> {
-            month.forEach((monthItem) -> {
-                Integer count = houseElk.countByCityNameAndDealYearAndDealMonth(cityName, year, monthItem);
-                houseResultContents.add(new HouseResultContent(year + monthItem, count));
-            });
-        });
+        yearMonths.put("2019", months.subList(6, 10));
+        yearMonths.forEach((year, month) -> month.forEach((monthItem) -> {
+            Integer count = houseElk.countByCityNameAndDealYearAndDealMonth(cityName, year, monthItem);
+            houseResultContents.add(new HouseResultContent(year + monthItem, count));
+        }));
         return houseResultContents;
     }
 
@@ -112,14 +113,15 @@ public class HouseService {
                         .filter(QueryBuilders.matchQuery("status", 1)))
                 .addAggregation(AggregationBuilders.terms("group_by_area").field("areaName").size(50)
                         .subAggregation(AggregationBuilders.avg("aver_price").field("unitprice"))).build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, SearchResponse::getAggregations);
         StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("group_by_area");
         List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        DecimalFormat df = new DecimalFormat("#.00");
         buckets.forEach(item -> {
             InternalAvg internalAvg = (InternalAvg) item.getAggregations().getAsMap().get("aver_price");
-            houseResultContents.add(new HouseResultContent(item.getKeyAsString(), internalAvg.getValue()));
+            houseResultContents.add(new HouseResultContent(item.getKeyAsString(), df.format(internalAvg.getValue())));
         });
-        Collections.sort(houseResultContents, (a, b) -> (int) ((double) b.getCount() - (double) a.getCount()));
+        houseResultContents.sort((a, b) -> (int) (Double.valueOf((String) b.getCount())  - Double.valueOf((String) a.getCount())));
         return houseResultContents;
     }
 
@@ -143,7 +145,7 @@ public class HouseService {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(termsQueryBuilder).filter(limitStatusBuilder);
         RangeAggregationBuilder rAB = AggregationBuilders.range("range_area").field("areaMainInfo").addRange(0, 50).addRange(50, 100).addRange(100, 150).addRange(150, 200).addUnboundedFrom(200);
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).addAggregation(rAB).build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, SearchResponse::getAggregations);
         InternalRange internalRange = (InternalRange) aggregations.asMap().get("range_area");
         List<InternalRange.Bucket> bucketList = internalRange.getBuckets();
         bucketList.forEach((item) -> {
@@ -161,7 +163,7 @@ public class HouseService {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(termsQueryBuilder).filter(limitStatusBuilder);
         RangeAggregationBuilder rAB = AggregationBuilders.range("range_price").field("price").addRange(0, 100).addRange(100, 200).addRange(200, 300).addRange(300, 400).addRange(400, 500).addRange(500, 600).addRange(600, 800).addRange(800,1000).addUnboundedFrom(1000);
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).addAggregation(rAB).build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, SearchResponse::getAggregations);
         InternalRange internalRange = (InternalRange) aggregations.asMap().get("range_price");
         List<InternalRange.Bucket> bucketList = internalRange.getBuckets();
         bucketList.forEach((item) -> {
@@ -178,12 +180,13 @@ public class HouseService {
                 .addAggregation(AggregationBuilders.terms("city").field("cityName").size(50)
                         .subAggregation(AggregationBuilders.avg("aver_price").field("unitprice"))
                         .order(BucketOrder.aggregation("aver_price", false))).build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, SearchResponse::getAggregations);
         StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
         List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        DecimalFormat df = new DecimalFormat("#.00");
         buckets.forEach(item -> {
             InternalAvg internalAvg = (InternalAvg) item.getAggregations().getAsMap().get("aver_price");
-            houseResultContents.add(new HouseResultContent(item.getKeyAsString(), internalAvg.getValue()));
+            houseResultContents.add(new HouseResultContent(item.getKeyAsString(), df.format(internalAvg.getValue())));
         });
         return houseResultContents;
     }
@@ -198,17 +201,18 @@ public class HouseService {
                                 .subAggregation(AggregationBuilders.avg("aver_price").field("unitprice"))
                                 .order(BucketOrder.aggregation("aver_price", false)))
                 ).build();
-        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, SearchResponse::getAggregations);
         StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
         List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        DecimalFormat df = new DecimalFormat("#.00");
         buckets.forEach(item -> {
             StringTerms stringTerms1 = (StringTerms) item.getAggregations().getAsMap().get("area");
             List<StringTerms.Bucket> buckets1 = stringTerms1.getBuckets();
             InternalAvg internalAvg = (InternalAvg) buckets1.get(0).getAggregations().getAsMap().get("aver_price");
             String cityArea = item.getKeyAsString() + "." + buckets1.get(0).getKeyAsString();
-            houseResultContents.add(new HouseResultContent(cityArea, internalAvg.getValue()));
+            houseResultContents.add(new HouseResultContent(cityArea, df.format(internalAvg.getValue())));
         });
-        houseResultContents.sort(Comparator.comparingDouble(o1 -> (double) o1.getCount()));
+        houseResultContents.sort(Comparator.comparingDouble(o1 -> Double.valueOf((String)o1.getCount())));
         Collections.reverse(houseResultContents);
         return houseResultContents;
     }

@@ -47,18 +47,18 @@ public class TestSpiderMan {
 
     @Test
     public void testHouse(){
-        spiderMan.crawlHouse("sz");
+        spiderMan.crawlHouse("zz");
     }
 
     @Test
     public void count() {
-        System.out.println(houseElk.countByCityName("石家庄"));
+        System.out.println(houseElk.countByCityNameAndStatus("郑州", 2));
     }
 
     @Test
     public void delete() {
-//        houseElk.deleteAllByCityName("广州");
-        houseElk.deleteAllByCityNameAndStatus("广州", 2);
+        houseElk.deleteAllByCityName("南京");
+//        houseElk.deleteAllByCityNameAndStatus("广州", 2);
     }
 
     @Test

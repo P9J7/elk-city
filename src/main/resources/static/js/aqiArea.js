@@ -262,6 +262,11 @@ $("#search").click(function () {
         };
 
         option = {
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
             title: {
                 text: '全国主要城市空气质量 - 百度地图',
                 subtext: 'data from 中国空气质量在线监测分析平台',
@@ -880,4 +885,4 @@ $(document).ready(function () {
         };
         myChart.setOption(option);
     })
-})
+});

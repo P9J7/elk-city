@@ -30,7 +30,7 @@ public class SpiderMan {
     }
 
     public void crawlHouse(String city) {
-        Spider houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+        Spider houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\lianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(10);
         houseSpider.addUrl("https://" + city + ".lianjia.com/ershoufang/");
         houseSpider.addUrl("https://" + city + ".lianjia.com/chengjiao/");
         try {
@@ -43,7 +43,7 @@ public class SpiderMan {
 
     public void crawlHouse() {
         Spider houseSpider = Spider.create(lianjiaSpider).setScheduler(new FileCacheQueueScheduler("D:\\AlllianjiaSpider")).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
-        LianjiaSpider.mapCity.forEach((k,v) -> {
+        LianjiaSpider.mapCity.forEach((k, v) -> {
             houseSpider.addUrl("https://" + k + ".lianjia.com/ershoufang/");
             houseSpider.addUrl("https://" + k + ".lianjia.com/chengjiao/");
         });
@@ -107,6 +107,20 @@ public class SpiderMan {
                 airSpider.addRequest(request);
             });
         });
+        airSpider.run();
+    }
+
+    public void crwalAqi(String city, String month) throws ScriptException, NoSuchMethodException {
+        String realParam = aqiSpider.encryptRequest(city, month);
+        Spider airSpider = Spider.create(aqiSpider).addPipeline(aqiSpider.aqiPipeline).thread(5);
+        Request request = new Request("https://www.aqistudy.cn/historydata/api/historyapi.php");
+        request.setMethod(HttpConstant.Method.POST);
+        Map<String, Object> map = new HashMap<>();
+        map.put("hd", realParam);
+        map.put("city", city);
+        request.setExtras(map);
+        request.setRequestBody(HttpRequestBody.form(map, "utf-8"));
+        airSpider.addRequest(request);
         airSpider.run();
     }
 }

@@ -36,9 +36,9 @@ public class LianjiaSpider implements PageProcessor {
         mapCity.put("xm", "厦门");
         mapCity.put("wh", "武汉");
         mapCity.put("nb", "宁波");
-        mapCity.put("sy", "沈阳");
+        mapCity.put("sy", "沈阳");//
         mapCity.put("ty", "太原");
-        mapCity.put("hrb", "哈尔滨");
+        mapCity.put("hrb", "哈尔滨");//
         mapCity.put("qd", "青岛");
         mapCity.put("dl", "大连");
         mapCity.put("cc", "长春");
