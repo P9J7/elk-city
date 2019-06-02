@@ -292,6 +292,8 @@ public class HouseService {
         Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
         StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
         List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        DecimalFormat df = new DecimalFormat("#.00");
+        List<List<String>> tempResults = new ArrayList<>();
         buckets.forEach(item -> {
             List<String> list = Arrays.asList(item.getKeyAsString(), "1室1厅", "2室1厅", "2室2厅", "3室1厅", "3室2厅", "4室2厅");
             StringTerms stringTerms1 = (StringTerms) item.getAggregations().getAsMap().get("room_type");
@@ -299,11 +301,19 @@ public class HouseService {
             buckets1.forEach(roomtype -> {
                 if (list.contains(roomtype.getKeyAsString())) {
                     InternalAvg internalAvg = (InternalAvg) roomtype.getAggregations().getAsMap().get("avg_type");
-                    list.set(list.indexOf(roomtype.getKeyAsString()), internalAvg.getValueAsString());
+                    list.set(list.indexOf(roomtype.getKeyAsString()), df.format(internalAvg.getValue()));
                 }
             });
-            results.add(list);
+            tempResults.add(list);
         });
-        return results;
+        tempResults.forEach(item -> item.replaceAll(t -> {
+            if (t.equals("1室1厅"))
+                return "0.00";
+            else
+                return t;
+        }));
+        tempResults.sort((city1,city2) -> (int) (Double.parseDouble(city2.get(1))-Double.parseDouble(city1.get(1))));
+        results.addAll(tempResults);
+        return results.subList(0, 11);
     }
 }
