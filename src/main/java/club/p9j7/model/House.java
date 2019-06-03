@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
-@Document(indexName = "lianjiaelk", type = "house")
+@Document(indexName = "house", type = "house")
 public class House implements Serializable {
     @Id
     private Long id;

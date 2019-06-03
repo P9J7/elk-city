@@ -3,7 +3,7 @@ package club.p9j7.service;
 import club.p9j7.model.House;
 import club.p9j7.model.HouseResultContent;
 import club.p9j7.repository.HouseElk;
-import club.p9j7.support.LianjiaSpider;
+import club.p9j7.support.HouseSpider;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -45,7 +45,7 @@ public class HouseService {
     @RequestMapping("/getCityCount")
     public List<HouseResultContent> getCityHouseCount() {
         List<HouseResultContent> cityList = new ArrayList<>();
-        LianjiaSpider.mapCity.forEach((k, v) -> {
+        HouseSpider.mapCity.forEach((k, v) -> {
             Integer count = houseElk.countByCityName(v);
             HouseResultContent houseResultContent = new HouseResultContent(v, count);
             cityList.add(houseResultContent);

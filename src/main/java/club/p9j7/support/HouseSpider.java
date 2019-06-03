@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class LianjiaSpider implements PageProcessor {
+public class HouseSpider implements PageProcessor {
     public final static Map<String, String> mapCity = new HashMap<>();
 
     static {
@@ -56,11 +56,11 @@ public class LianjiaSpider implements PageProcessor {
         mapCity.put("hhht", "呼和浩特");
     }
 
-    public final Pipeline lianjiaPipeline;
+    public final Pipeline housePipeline;
 
     @Autowired
-    public LianjiaSpider(Pipeline lianjiaPipeline) {
-        this.lianjiaPipeline = lianjiaPipeline;
+    public HouseSpider(Pipeline housePipeline) {
+        this.housePipeline = housePipeline;
     }
 
     //正则匹配城市在售首页
@@ -81,7 +81,7 @@ public class LianjiaSpider implements PageProcessor {
     private static final String urlDealIndex = "https://[a-z]{2,}\\.lianjia\\.com/chengjiao/[a-z]+\\d*/pg\\d+/";
 
     private Site site = Site.me().setCharset("UTF-8").setUserAgent("Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5").setRetryTimes(3).setSleepTime(100).setTimeOut(10000);
-    private static Logger logger = LoggerFactory.getLogger(LianjiaSpider.class);
+    private static Logger logger = LoggerFactory.getLogger(HouseSpider.class);
 
     @Override
     public void process(Page page) {

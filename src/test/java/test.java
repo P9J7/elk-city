@@ -1,7 +1,7 @@
 import club.p9j7.Application;
 import club.p9j7.controller.IndexController;
 import club.p9j7.model.House;
-import club.p9j7.support.LianjiaSpider;
+import club.p9j7.support.HouseSpider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class test {
     private IndexController indexController;
 
     @Autowired
-    private LianjiaSpider lianjiaSpider;
+    private HouseSpider houseSpider;
 
     @Autowired
     private MockMvc mvc;

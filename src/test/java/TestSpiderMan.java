@@ -3,7 +3,7 @@ import club.p9j7.model.Aqi;
 import club.p9j7.model.HouseResultContent;
 import club.p9j7.repository.AqiElk;
 import club.p9j7.repository.HouseElk;
-import club.p9j7.support.LianjiaSpider;
+import club.p9j7.support.HouseSpider;
 import club.p9j7.support.SpiderMan;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -37,7 +37,7 @@ public class TestSpiderMan {
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
     @Autowired
-    LianjiaSpider lianjiaSpider;
+    HouseSpider houseSpider;
 
 
     @Test
@@ -63,7 +63,7 @@ public class TestSpiderMan {
 
     @Test
     public void secondCrawl(){
-        Spider houseSpider = Spider.create(lianjiaSpider).addPipeline(lianjiaSpider.lianjiaPipeline).thread(5);
+        Spider houseSpider = Spider.create(this.houseSpider).addPipeline(this.houseSpider.housePipeline).thread(5);
         houseSpider.addUrl("https://cq.lianjia.com/chengjiao/jiangjing/");
         houseSpider.run();
     }

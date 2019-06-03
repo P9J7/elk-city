@@ -15,11 +15,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Component
-public class LianjiaPipeline implements Pipeline {
+public class HousePipeline implements Pipeline {
     @Autowired
     HouseElk houseElk;
 
-    private static Logger logger = LoggerFactory.getLogger(LianjiaPipeline.class);
+    private static Logger logger = LoggerFactory.getLogger(HousePipeline.class);
     private static long houseCount = 0;
     private final static List<House> houseList = Collections.synchronizedList(new LinkedList<>());
 
