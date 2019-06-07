@@ -51,6 +51,7 @@ public class HouseService {
             cityList.add(houseResultContent);
         });
         cityList.sort(Comparator.comparingInt(a -> (int) a.getCount()));
+        Collections.reverse(cityList);
         return cityList;
     }
 
@@ -286,8 +287,8 @@ public class HouseService {
         results.add(th);
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery("status", 1))
                 .addAggregation(AggregationBuilders.terms("city").field("cityName").size(50)
-                        .subAggregation(AggregationBuilders.terms("room_type").field("roomMainInfo").size(50)
-                                .subAggregation(AggregationBuilders.avg("avg_type").field("unitprice")).order(BucketOrder.aggregation("avg_type", false))))
+                        .subAggregation(AggregationBuilders.terms("room_type").field("roomMainInfo").size(100)
+                                .subAggregation(AggregationBuilders.avg("avg_type").field("unitprice"))))
                 .build();
         Aggregations aggregations = elasticsearchTemplate.query(searchQuery, response -> response.getAggregations());
         StringTerms stringTerms = (StringTerms) aggregations.getAsMap().get("city");
@@ -306,12 +307,6 @@ public class HouseService {
             });
             tempResults.add(list);
         });
-        tempResults.forEach(item -> item.replaceAll(t -> {
-            if (t.equals("1室1厅"))
-                return "0.00";
-            else
-                return t;
-        }));
         tempResults.sort((city1,city2) -> (int) (Double.parseDouble(city2.get(1))-Double.parseDouble(city1.get(1))));
         results.addAll(tempResults);
         return results.subList(0, 11);
