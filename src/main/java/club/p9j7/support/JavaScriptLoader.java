@@ -17,7 +17,7 @@ public class JavaScriptLoader {
     public Invocable invocable() throws IOException, ScriptException {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("javascript");
-        String jsFileName = "C:\\Users\\P9J7\\Desktop\\elkcity\\src\\main\\resources\\server.js";
+        String jsFileName = this.getClass().getClassLoader().getResource("server.js").getPath();
         // 读取js文件
         FileReader reader = new FileReader(jsFileName);
         // 执行指定脚本
